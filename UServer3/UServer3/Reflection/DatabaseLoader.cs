@@ -39,6 +39,14 @@ namespace UServer3.Reflection
                     GetAddMethod(field.FieldType).Invoke(instance, new[] {item});
                 }
 
+                string RemoveComment(string line)
+                {
+                    var commentIndex = line.IndexOf("//");
+                    if (commentIndex != -1)
+                        return line.Remove(commentIndex, line.Length - commentIndex);
+                    return line;
+                }
+
                 int loaded = 0;
                 for (var i = 0; i < fields.Length; i++)
                 {
@@ -51,9 +59,13 @@ namespace UServer3.Reflection
                         var lines = File.ReadAllLines(filename);
                         for (int j = 0; j < lines.Length; j++)
                         {
+                            var line = lines[j];
+                            if (string.IsNullOrEmpty(line)) continue;
+                            line = RemoveComment(line);
+                            
                             Type itemType = field.FieldType.GetGenericArguments()[0];
 
-                            ListAdd(field, ChangeType(lines[j], itemType));
+                            ListAdd(field, ChangeType(line, itemType));
                         }
                         loaded++;
                     }
