@@ -1,7 +1,7 @@
 ﻿using System.IO;
 using AntiRak.RakNet.Network;
 
-namespace UServer3.Encrypt
+namespace UServer3.Cryptography
 {
     public abstract class NetworkCryptography : INetworkCryptocraphy
     {

@@ -1,8 +1,8 @@
 ﻿using System.IO;
 
-namespace UServer3.Encrypt
+namespace UServer3.Cryptography
 {
-    public static class Craptography
+    public static class Cryptography
     {
         // Fields
         private static readonly byte[] hash = new byte[]

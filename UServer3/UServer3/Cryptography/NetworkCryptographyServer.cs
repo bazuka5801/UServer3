@@ -1,7 +1,7 @@
 ﻿using System.IO;
 using AntiRak.RakNet.Network;
 
-namespace UServer3.Encrypt
+namespace UServer3.Cryptography
 {
     public class NetworkCryptographyServer : NetworkCryptography
     {
@@ -10,7 +10,7 @@ namespace UServer3.Encrypt
         {
             if (connection.encryptionLevel <= 1)
             {
-                Craptography.XOR(0x7eb, src, srcOffset, dst, dstOffset);
+                Cryptography.XOR(0x7eb, src, srcOffset, dst, dstOffset);
             }
             else
             {
@@ -22,7 +22,7 @@ namespace UServer3.Encrypt
         {
             if (connection.encryptionLevel <= 1)
             {
-                Craptography.XOR(0x7eb, src, srcOffset, dst, dstOffset);
+                Cryptography.XOR(0x7eb, src, srcOffset, dst, dstOffset);
             }
             else
             {

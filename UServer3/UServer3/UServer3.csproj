@@ -70,9 +70,9 @@
   <ItemGroup>
     <Compile Include="Bootstrap.cs" />
     <Compile Include="EACServer.cs" />
-    <Compile Include="Encrypt\Craptography.cs" />
-    <Compile Include="Encrypt\NetworkCryptography.cs" />
-    <Compile Include="Encrypt\NetworkCryptographyServer.cs" />
+    <Compile Include="Cryptography\Cryptography.cs" />
+    <Compile Include="Cryptography\NetworkCryptography.cs" />
+    <Compile Include="Cryptography\NetworkCryptographyServer.cs" />
     <Compile Include="Network\NetworkManager.cs" />
     <Compile Include="Network\VirtualServer.cs" />
     <Compile Include="OpCodes.cs" />
