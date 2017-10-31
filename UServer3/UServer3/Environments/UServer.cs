@@ -1,6 +1,6 @@
-﻿using System.IO;
-using SapphireEngine;
+﻿using SapphireEngine;
 using UServer3.Network;
+using UServer3.Reflection;
 
 namespace UServer3.Environments
 {
@@ -10,18 +10,11 @@ namespace UServer3.Environments
         
         public override void OnAwake()
         {
-            CreateLogsDirectoryIfNotExist();
             ConsoleSystem.OutputPath = Bootstrap.OutputPath;
             ConsoleSystem.Log("[Bootstrap]: Приложение запущено");
+            DatabaseLoader.Load<OpCodes>();
             this.AddType<VirtualServer>();
             this.AddType<NetworkManager>();
-        }
-
-        public void CreateLogsDirectoryIfNotExist()
-        {
-            var directoryName = Path.GetDirectoryName(Bootstrap.OutputPath);
-            if (Directory.Exists(directoryName) == false)
-                Directory.CreateDirectory(directoryName);
         }
     }
 }

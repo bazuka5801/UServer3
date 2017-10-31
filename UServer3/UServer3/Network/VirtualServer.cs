@@ -4,10 +4,10 @@ using ProtoBuf;
 using SapphireEngine;
 using SapphireEngine.Functions;
 using RakNet.Network;
-using UnityEngine;
 using UServer2.Struct;
 using UServer3.Environments;
 using UServer3.Environments.Cryptography;
+using UServer3.Rust;
 
 namespace UServer3.Network
 {
@@ -237,7 +237,7 @@ namespace UServer3.Network
                     packet.read.UInt32();
                     using (Entity entity = Entity.Deserialize(packet.read))
                     {
-                        if (!NetworkManager.Instance.IN_Entity(entity))
+                        if (EntityManager.OnEntity(entity))
                         {
                             if (BaseServer.write.Start())
                             {
@@ -248,6 +248,14 @@ namespace UServer3.Network
                             }
                         }
                     }
+                    break;
+                case Message.Type.EntityDestroy:
+                    EntityManager.OnEntityDestroy(packet);
+                    SendPacket(BaseServer, packet);
+                    break;
+                case Message.Type.EntityPosition:
+                    EntityManager.OnEntityPosition(packet);
+                    SendPacket(BaseServer, packet);
                     break;
                 default:
                     if (NetworkManager.Instance.IN_NetworkMessage(packet) == false)

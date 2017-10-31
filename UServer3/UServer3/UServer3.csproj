@@ -16,7 +16,7 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>x64</PlatformTarget>
     <DebugSymbols>false</DebugSymbols>
-    <DebugType>none</DebugType>
+    <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
@@ -54,11 +54,6 @@
       <Private>False</Private>
     </Reference>
     <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
     <Reference Include="UnityEngine, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
       <HintPath>..\Reference\UnityEngine.dll</HintPath>
       <Private>False</Private>
@@ -75,14 +70,18 @@
     <Compile Include="Environments\Cryptography\NetworkCryptographyServer.cs" />
     <Compile Include="Environments\EACServer.cs" />
     <Compile Include="Environments\UServer.cs" />
+    <Compile Include="Network\EntityManager.cs" />
     <Compile Include="Network\NetworkManager.cs" />
     <Compile Include="Network\VirtualServer.cs" />
     <Compile Include="OpCodes.cs" />
+    <Compile Include="Reflection\DatabaseLoader.cs" />
+    <Compile Include="Reflection\FastMethodInfo.cs" />
     <Compile Include="Rust\BaseCombatEntity.cs" />
     <Compile Include="Rust\BaseEntity.cs" />
     <Compile Include="Rust\BaseHeldEntity.cs" />
     <Compile Include="Rust\BaseNetworkable.cs" />
     <Compile Include="Rust\BasePlayer.cs" />
+    <Compile Include="Rust\CollectibleEntity.cs" />
     <Compile Include="Settings.cs" />
     <Compile Include="Struct\UserInformation.cs" />
   </ItemGroup>

@@ -9,9 +9,11 @@ namespace UServer3
     {
         public static string OutputPath { get; } = AppDomain.CurrentDomain.BaseDirectory + "/Logs/output.log";
         public static string BinPath { get; } = AppDomain.CurrentDomain.BaseDirectory + "/Data/Bin/";
+        public static string DatabasePath { get; } = AppDomain.CurrentDomain.BaseDirectory + "/Data/Database/";
         
         static Bootstrap()
         {
+            CreateLogsDirectoryIfNotExist();
             AppDomain.CurrentDomain.SetupInformation.PrivateBinPath = BinPath;
             AppDomain.CurrentDomain.AssemblyResolve += (sender, args) =>
             {
@@ -23,5 +25,12 @@ namespace UServer3
         }
 
         public static void Main(string[] args) => UServer.Initialization();
+
+        private static void CreateLogsDirectoryIfNotExist()
+        {
+            var directoryName = Path.GetDirectoryName(Bootstrap.OutputPath);
+            if (Directory.Exists(directoryName) == false)
+                Directory.CreateDirectory(directoryName);
+        }
     }
 }

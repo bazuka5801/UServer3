@@ -122,5 +122,39 @@ namespace UServer3
             EPrefabUID.SalvagedPixAxe,
         };
         #endregion
+
+        public static bool IsCollectable(UInt32 uid) => DB_Collectables.Contains(uid);
+        private static HashSet<UInt32> DB_Collectables;
+        public static bool IsBaseResource(UInt32 uid) => DB_BaseResource.Contains(uid);
+        private static HashSet<UInt32> DB_BaseResource;
+        public static bool IsBaseOre(UInt32 uid) => DB_BaseOre.Contains(uid);
+        private static HashSet<UInt32> DB_BaseOre;
+        public static bool IsComponent(Int32 id) => DB_Component.Contains(id);
+        private static HashSet<Int32> DB_Component;
+
+        #region [Enum] [E_PlayerFlags] Player Flags
+        [Flags]
+        public enum E_PlayerFlags
+        {
+            Aiming = 16384,
+            ChatMute = 4096,
+            Connected = 256,
+            DisplaySash = 32768,
+            EyesViewmode = 2048,
+            HasBuildingPrivilege = 2,
+            InBuildingPrivilege = 1,
+            IsAdmin = 4,
+            IsDeveloper = 128,
+            NoSprint = 8192,
+            ReceivingSnapshot = 8,
+            Sleeping = 16,
+            Spectating = 32,
+            ThirdPersonViewmode = 1024,
+            VoiceMuted = 512,
+            Wounded = 64
+        }
+        #endregion
+
+        
     }
 }

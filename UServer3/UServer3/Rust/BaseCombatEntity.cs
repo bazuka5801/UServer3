@@ -1,15 +1,30 @@
-﻿using ProtoBuf;
+﻿using System;
+using ProtoBuf;
 
 namespace UServer3.Rust
 {
     public class BaseCombatEntity : BaseEntity
     {
-        public float Helath = 0f;
-        public bool IsAlive => this.Helath != 0;
-        
-        public BaseCombatEntity(Entity entity) : base(entity)
+        public Single Health;
+        public LifeState State;
+
+        public bool IsDead() => State == LifeState.Dead;
+        public bool IsAlive() => State == LifeState.Alive;
+
+        public override void OnEntityCreate(Entity entity)
         {
-            
+            base.OnEntity(entity);
+            if (entity.baseCombat != null)
+            {
+                Health = entity.baseCombat.health;
+                State = (LifeState) entity.baseCombat.state;
+            }
+        }
+        
+        public enum LifeState
+        {
+            Alive,
+            Dead
         }
     }
 }
