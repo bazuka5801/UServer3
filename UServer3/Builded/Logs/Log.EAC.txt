@@ -39,3 +39,4 @@
 31.10.2017 12:44:48  [Info] [QueueClientUpdate] Client: 0000000000000004 Session: 4 Status: Client Authentication Failed Message: Authentication timed out (1/2)
 31.10.2017 12:44:48  [Info] [SetClientNetworkState] ClientObject: 0000000000000003 NetworkActive: No.
 31.10.2017 12:44:48  [Info] [SetClientNetworkState] ClientObject: 0000000000000004 NetworkActive: No.
+31.10.2017 14:43:11  [Info] [SetLogCallback] Procedure: 0000000002220BCC LogLevel: Debug
