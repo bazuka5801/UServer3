@@ -10,7 +10,7 @@ namespace UServer3
         public static String Connection2_Username = "Alistair"; // Username подключения до игрового клиента
 
         public static String TargetServer_IP = "127.0.0.1"; // IP Сервера к которому будет происходить коннект
-        public static Int32 TargetServer_Port = 28015; // Port Сервера к которому будет происходить коннект
+        public static Int32 TargetServer_Port = 12000; // Port Сервера к которому будет происходить коннект
 
         public static UInt32 GameClient_EncryptionLevel = 2; // Уровень шифрования между игровым клиентом и читом
     }

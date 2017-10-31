@@ -76,11 +76,13 @@
     <Compile Include="OpCodes.cs" />
     <Compile Include="Reflection\DatabaseLoader.cs" />
     <Compile Include="Reflection\FastMethodInfo.cs" />
+    <Compile Include="Reflection\RPCManager.cs" />
     <Compile Include="Rust\BaseCombatEntity.cs" />
     <Compile Include="Rust\BaseEntity.cs" />
     <Compile Include="Rust\BaseHeldEntity.cs" />
     <Compile Include="Rust\BaseNetworkable.cs" />
     <Compile Include="Rust\BasePlayer.cs" />
+    <Compile Include="Rust\BaseResource.cs" />
     <Compile Include="Rust\CollectibleEntity.cs" />
     <Compile Include="Settings.cs" />
     <Compile Include="Struct\UserInformation.cs" />

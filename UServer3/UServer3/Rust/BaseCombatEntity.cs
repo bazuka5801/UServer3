@@ -13,7 +13,7 @@ namespace UServer3.Rust
 
         public override void OnEntityCreate(Entity entity)
         {
-            base.OnEntity(entity);
+            base.OnEntityCreate(entity);
             if (entity.baseCombat != null)
             {
                 Health = entity.baseCombat.health;

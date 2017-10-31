@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using ProtoBuf;
 using RakNet.Network;
 using SapphireEngine;
+using UServer3.Reflection;
 
 namespace UServer3.Rust
 {
@@ -59,8 +60,8 @@ namespace UServer3.Rust
             }
         }
         
-        
-        public bool OnRPC_StartLoading(Message message)
+        [RPCMethod(OpCodes.ERPCMethodUID.StartLoading)]
+        public bool RPC_StartLoading(OpCodes.ERPCMethodUID type, Message message)
         {
             ConsoleSystem.Log("StartLoading");
             

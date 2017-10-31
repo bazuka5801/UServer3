@@ -79,6 +79,13 @@ namespace UServer3
             Reload =                     3360326041, //конец перезарядки
         }
 
+        #region [Enum] [ERPCNetworkType] RPC Network Type
+        public enum ERPCNetworkType
+        {
+            IN,
+            OUT
+        }
+        #endregion
 
         public static bool IsMeleWeapon_Prefab(EPrefabUID prefab) => ListMeleHeald.Contains(prefab);
         public static bool IsFireWeapon_Prefab(EPrefabUID prefab) => ListFireHeald.Contains(prefab);
