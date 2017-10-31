@@ -1,13 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Runtime.CompilerServices;
-using AntiRak.RakNet;
 using EasyAntiCheat.Server;
 using EasyAntiCheat.Server.Hydra;
-using EasyAntiCheat.Server.Hydra.Cerberus;
-using EasyAntiCheat.Server.Scout;
-using AntiRak.RakNet.Network;
+using RakNet.Network;
 using SapphireEngine;
 using Client = EasyAntiCheat.Server.Hydra.Client;
 

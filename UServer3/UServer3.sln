@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.26430.13
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UServer3", "UServer3\UServer3.csproj", "{4F0EADF8-4AE2-4C74-97BE-5FF89C2104AB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UServer3.RakNet", "UServer3.RakNet\UServer3.RakNet.csproj", "{CE194BCD-DF50-4A0A-BAF4-19C42E183CE5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{4F0EADF8-4AE2-4C74-97BE-5FF89C2104AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4F0EADF8-4AE2-4C74-97BE-5FF89C2104AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4F0EADF8-4AE2-4C74-97BE-5FF89C2104AB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CE194BCD-DF50-4A0A-BAF4-19C42E183CE5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CE194BCD-DF50-4A0A-BAF4-19C42E183CE5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CE194BCD-DF50-4A0A-BAF4-19C42E183CE5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CE194BCD-DF50-4A0A-BAF4-19C42E183CE5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

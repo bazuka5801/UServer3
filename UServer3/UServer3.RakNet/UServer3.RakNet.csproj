@@ -4,80 +4,73 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{4F0EADF8-4AE2-4C74-97BE-5FF89C2104AB}</ProjectGuid>
+    <ProjectGuid>{CE194BCD-DF50-4A0A-BAF4-19C42E183CE5}</ProjectGuid>
     <ProjectTypeGuids>{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
-    <OutputType>Exe</OutputType>
+    <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>UServer3</RootNamespace>
-    <AssemblyName>UServer3</AssemblyName>
+    <RootNamespace>UServer3.RakNet</RootNamespace>
+    <AssemblyName>UServer3.RakNet</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>x64</PlatformTarget>
-    <DebugSymbols>false</DebugSymbols>
-    <DebugType>none</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>x64</PlatformTarget>
-    <DebugType>none</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>..\Builded\</OutputPath>
+    <OutputPath>bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="EasyAntiCheat.Server, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
-      <HintPath>..\Reference\EasyAntiCheat.Server.dll</HintPath>
-    </Reference>
     <Reference Include="Facepunch.System, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
       <HintPath>..\Reference\Facepunch.System.dll</HintPath>
     </Reference>
     <Reference Include="Rust.Data, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
       <HintPath>..\Reference\Rust.Data.dll</HintPath>
     </Reference>
-    <Reference Include="Rust.Global, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
-      <HintPath>..\Reference\Rust.Global.dll</HintPath>
-    </Reference>
     <Reference Include="SapphireEngine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
       <HintPath>..\Reference\SapphireEngine.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
     <Reference Include="UnityEngine, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
       <HintPath>..\Reference\UnityEngine.dll</HintPath>
     </Reference>
-    <Reference Include="UnityEngine.UI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
-      <HintPath>..\Reference\UnityEngine.UI.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Bootstrap.cs" />
-    <Compile Include="EACServer.cs" />
-    <Compile Include="Cryptography\Cryptography.cs" />
-    <Compile Include="Cryptography\NetworkCryptography.cs" />
-    <Compile Include="Cryptography\NetworkCryptographyServer.cs" />
-    <Compile Include="Network\NetworkManager.cs" />
-    <Compile Include="Network\VirtualServer.cs" />
-    <Compile Include="OpCodes.cs" />
+    <Compile Include="Client.cs" />
+    <Compile Include="Native.cs" />
+    <Compile Include="Network\Client.cs" />
+    <Compile Include="Network\Connection.cs" />
+    <Compile Include="Network\INetworkCryptocraphy.cs" />
+    <Compile Include="Network\Message.cs" />
+    <Compile Include="Network\NetworkPeer.cs" />
+    <Compile Include="Network\Read.cs" />
+    <Compile Include="Network\SendInfo.cs" />
+    <Compile Include="Network\Server.cs" />
+    <Compile Include="Network\Write.cs" />
+    <Compile Include="PacketType.cs" />
+    <Compile Include="Peer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Settings.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\UServer3.RakNet\UServer3.RakNet.csproj">
-      <Project>{ce194bcd-df50-4a0a-baf4-19c42e183ce5}</Project>
-      <Name>UServer3.RakNet</Name>
-    </ProjectReference>
+    <Compile Include="Server.cs" />
+    <Compile Include="StreamRead.cs" />
+    <Compile Include="StreamWrite.cs" />
+    <Compile Include="TimeWarning.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -1,17 +1,17 @@
 ﻿using System;
 using System.IO;
-using AntiRak.RakNet.Network;
 using ProtoBuf;
 using SapphireEngine;
 using SapphireEngine.Functions;
-using UServer3.Encrypt;
+using RakNet.Network;
+using UServer3.Cryptography;
 
 namespace UServer3.Network
 {
     public class VirtualServer : SapphireType
     {
-        public static AntiRak.RakNet.Server BaseServer;
-        public static AntiRak.RakNet.Client BaseClient;
+        public static Server BaseServer;
+        public static Client BaseClient;
 
         public override void OnAwake()
         {
@@ -61,7 +61,7 @@ namespace UServer3.Network
             try
             {
                 ConsoleSystem.Log("[VirtualServer]: Служба Network запускается...");
-                BaseServer = new AntiRak.RakNet.Server
+                BaseServer = new RakNet.Server
                 {
                     ip = "0.0.0.0",
                     port = 28001,
@@ -71,7 +71,7 @@ namespace UServer3.Network
                     onDisconnected = OUT_OnDisconnected
                 };
 
-                BaseClient = new AntiRak.RakNet.Client()
+                BaseClient = new RakNet.Client()
                 {
                     onMessage = IN_OnNetworkMessage,
                     OnRakNetPacket = IN_OnRakNetMessage,
@@ -301,7 +301,7 @@ namespace UServer3.Network
             {
                 peer.write.Start();
                 peer.write.Write(br.ReadBytes((int) message.peer.read.Length), 0, (int) message.peer.read.Length);
-                peer.write.Send(new SendInfo(peer is AntiRak.RakNet.Client ? BaseClient.Connection : BaseServer.connections[0]));
+                peer.write.Send(new SendInfo(peer is RakNet.Client ? BaseClient.Connection : BaseServer.connections[0]));
             }
         }
 
@@ -309,7 +309,7 @@ namespace UServer3.Network
         {
             peer.write.Start();
             peer.write.Write(message, 0, (int) message.Length);
-            peer.write.Send(new SendInfo(peer is AntiRak.RakNet.Client ? BaseClient.Connection : BaseServer.connections[0]));
+            peer.write.Send(new SendInfo(peer is RakNet.Client ? BaseClient.Connection : BaseServer.connections[0]));
         }
 
         #endregion
