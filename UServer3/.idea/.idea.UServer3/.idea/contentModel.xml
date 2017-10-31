@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ContentModelStore">
+    <e p="C:\Users\TheRyuzaki\.Rider2017.2\system\resharper-host\local\Transient\ReSharperHost\v10\SolutionCaches\_UServer3.2100530195.00" t="ExcludeRecursive" />
+    <e p="C:\Users\TheRyuzaki\Documents\GitHub\unitytool_main\UServer3" t="IncludeFlat">
+      <e p="Builded" t="ExcludeRecursive" />
+      <e p="packages" t="ExcludeRecursive" />
+      <e p="UServer3" t="IncludeRecursive">
+        <e p="Bootstrap.cs" t="Include" />
+        <e p="EACServer.cs" t="Include" />
+        <e p="Encrypt" t="Include">
+          <e p="Craptography.cs" t="Include" />
+          <e p="NetworkCryptography.cs" t="Include" />
+          <e p="NetworkCryptographyServer.cs" t="Include" />
+        </e>
+        <e p="Network" t="Include">
+          <e p="NetworkManager.cs" t="Include" />
+          <e p="VirtualServer.cs" t="Include" />
+        </e>
+        <e p="obj" t="ExcludeRecursive" />
+        <e p="OpCodes.cs" t="Include" />
+        <e p="Properties" t="Include">
+          <e p="AssemblyInfo.cs" t="Include" />
+        </e>
+        <e p="Settings.cs" t="Include" />
+        <e p="UServer3.csproj" t="IncludeRecursive" />
+      </e>
+      <e p="UServer3.sln" t="IncludeFlat" />
+    </e>
+  </component>
+</project>

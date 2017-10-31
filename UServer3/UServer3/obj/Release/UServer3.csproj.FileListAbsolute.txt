@@ -1,0 +1,5 @@
+C:\Users\TheRyuzaki\Documents\GitHub\unitytool_main\UServer3\UServer3\bin\Release\UServer3.exe
+C:\Users\TheRyuzaki\Documents\GitHub\unitytool_main\UServer3\UServer3\bin\Release\UServer3.pdb
+C:\Users\TheRyuzaki\Documents\GitHub\unitytool_main\UServer3\UServer3\obj\Release\UServer3.csprojResolveAssemblyReference.cache
+C:\Users\TheRyuzaki\Documents\GitHub\unitytool_main\UServer3\UServer3\obj\Release\UServer3.exe
+C:\Users\TheRyuzaki\Documents\GitHub\unitytool_main\UServer3\Builded\UServer3.exe

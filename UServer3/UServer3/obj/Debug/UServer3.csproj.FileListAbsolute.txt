@@ -1,0 +1,13 @@
+C:\Users\TheRyuzaki\Documents\GitHub\unitytool_main\UServer3\Builded\UServer3.exe
+C:\Users\TheRyuzaki\Documents\GitHub\unitytool_main\UServer3\UServer3\obj\Debug\UServer3.csprojResolveAssemblyReference.cache
+C:\Users\TheRyuzaki\Documents\GitHub\unitytool_main\UServer3\UServer3\obj\Debug\UServer3.exe
+C:\Users\TheRyuzaki\Documents\GitHub\unitytool_main\UServer3\UServer3\bin\Debug\UServer3.exe
+C:\Users\TheRyuzaki\Documents\GitHub\unitytool_main\UServer3\UServer3\bin\Debug\AntiRak.Common.dll
+C:\Users\TheRyuzaki\Documents\GitHub\unitytool_main\UServer3\UServer3\bin\Debug\AntiRak.RakNet.dll
+C:\Users\TheRyuzaki\Documents\GitHub\unitytool_main\UServer3\UServer3\bin\Debug\EasyAntiCheat.Server.dll
+C:\Users\TheRyuzaki\Documents\GitHub\unitytool_main\UServer3\UServer3\bin\Debug\Facepunch.System.dll
+C:\Users\TheRyuzaki\Documents\GitHub\unitytool_main\UServer3\UServer3\bin\Debug\Rust.Data.dll
+C:\Users\TheRyuzaki\Documents\GitHub\unitytool_main\UServer3\UServer3\bin\Debug\Rust.Global.dll
+C:\Users\TheRyuzaki\Documents\GitHub\unitytool_main\UServer3\UServer3\bin\Debug\SapphireEngine.dll
+C:\Users\TheRyuzaki\Documents\GitHub\unitytool_main\UServer3\UServer3\bin\Debug\UnityEngine.dll
+C:\Users\TheRyuzaki\Documents\GitHub\unitytool_main\UServer3\UServer3\bin\Debug\UnityEngine.UI.dll

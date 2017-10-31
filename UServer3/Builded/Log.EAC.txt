@@ -1,0 +1,34 @@
+31.10.2017 2:02:52  [Info] [SetLogCallback] Procedure: 00000000018E0BCC LogLevel: Debug
+31.10.2017 2:03:12  [Info] [SetLogCallback] Procedure: 000000001C7AE21C LogLevel: Debug
+31.10.2017 2:03:42  [Info] [SetLogCallback] Procedure: 000000001CF5E85C LogLevel: Debug
+31.10.2017 2:03:53  [Info] [SetLogCallback] Procedure: 000000001CA8EDAC LogLevel: Debug
+31.10.2017 2:04:47  [Info] [SetLogCallback] Procedure: 000000001C06FB1C LogLevel: Debug
+31.10.2017 2:05:16  [Info] [SetLogCallback] Procedure: 000000001CE9CB9C LogLevel: Debug
+31.10.2017 2:05:28  [Info] [SetLogCallback] Procedure: 000000001CC2C82C LogLevel: Debug
+31.10.2017 2:05:33  [Info] [RegisterClient] Client: 0000000000000001 PlayerGUID: 76561197960279927 PlayerIP: 127.0.0.1 OwnerGUID: 77d883a5-84fe-4f63-9412-1970c5683c2d PlayerName: 77a096a5-2e0f-40ec-ac44-80f96d019dae
+31.10.2017 2:05:33  [Info] [SetClientNetworkState] ClientObject: 0000000000000001 NetworkActive: No.
+31.10.2017 2:05:33  [Info] [SetClientNetworkState] ClientObject: 0000000000000001 NetworkActive: Yes.
+31.10.2017 2:05:33  [Info] [RegisterClient] Client: 0000000000000002 PlayerGUID: 76561198240345356 PlayerIP: 127.0.0.1 OwnerGUID: 96f24e27-c919-4f42-8c67-f0e829f812da PlayerName: 23509051-7220-46b9-90e3-a5ed1bcc3621
+31.10.2017 2:05:33  [Info] [SetClientNetworkState] ClientObject: 0000000000000002 NetworkActive: No.
+31.10.2017 2:05:33  [Info] [SetClientNetworkState] ClientObject: 0000000000000002 NetworkActive: Yes.
+31.10.2017 2:05:33  [Info] [Cerberus] Back-end connection established.
+31.10.2017 2:05:53  [Info] [QueueClientUpdate] Client: 0000000000000001 Session: 1 Status: Client Authentication Failed Message: Authentication timed out (1/2)
+31.10.2017 2:05:53  [Info] [QueueClientUpdate] Client: 0000000000000002 Session: 2 Status: Client Authentication Failed Message: Authentication timed out (1/2)
+31.10.2017 2:05:53  [Info] [SetClientNetworkState] ClientObject: 0000000000000001 NetworkActive: No.
+31.10.2017 2:05:53  [Info] [SetClientNetworkState] ClientObject: 0000000000000002 NetworkActive: No.
+31.10.2017 2:08:19  [Info] [SetLogCallback] Procedure: 000000001CE7C64C LogLevel: Debug
+31.10.2017 2:08:22  [Info] [RegisterClient] Client: 0000000000000001 PlayerGUID: 76561197960279927 PlayerIP: 127.0.0.1 OwnerGUID: 526fc323-0f07-41b3-bb50-3375169bac70 PlayerName: cad8b79e-1cf7-40d1-bcad-e700aa2865b7
+31.10.2017 2:08:22  [Info] [SetClientNetworkState] ClientObject: 0000000000000001 NetworkActive: No.
+31.10.2017 2:08:22  [Info] [SetClientNetworkState] ClientObject: 0000000000000001 NetworkActive: Yes.
+31.10.2017 2:08:22  [Info] [RegisterClient] Client: 0000000000000002 PlayerGUID: 76561198240345356 PlayerIP: 127.0.0.1 OwnerGUID: 063b95b2-9f65-400f-a1de-cb5d3b5a9d14 PlayerName: 3de44974-cab1-438a-9ec7-c1ebfdd6949d
+31.10.2017 2:08:22  [Info] [SetClientNetworkState] ClientObject: 0000000000000002 NetworkActive: No.
+31.10.2017 2:08:22  [Info] [SetClientNetworkState] ClientObject: 0000000000000002 NetworkActive: Yes.
+31.10.2017 2:08:22  [Info] [Cerberus] Back-end connection established.
+31.10.2017 2:08:38  [Info] [SetLogCallback] Procedure: 000000001CFCDCCC LogLevel: Debug
+31.10.2017 2:08:40  [Info] [RegisterClient] Client: 0000000000000001 PlayerGUID: 76561197960279927 PlayerIP: 127.0.0.1 OwnerGUID: f7366875-dda6-45f8-bf3a-c80a80d25664 PlayerName: a24aab5c-744c-44d9-ba30-95d445090f7b
+31.10.2017 2:08:40  [Info] [SetClientNetworkState] ClientObject: 0000000000000001 NetworkActive: No.
+31.10.2017 2:08:40  [Info] [SetClientNetworkState] ClientObject: 0000000000000001 NetworkActive: Yes.
+31.10.2017 2:08:40  [Info] [RegisterClient] Client: 0000000000000002 PlayerGUID: 76561198240345356 PlayerIP: 127.0.0.1 OwnerGUID: 0c832bc6-a086-4f57-9763-1c76884a8f16 PlayerName: d4027e1d-bf62-45cd-bed1-758083fdca05
+31.10.2017 2:08:40  [Info] [SetClientNetworkState] ClientObject: 0000000000000002 NetworkActive: No.
+31.10.2017 2:08:40  [Info] [SetClientNetworkState] ClientObject: 0000000000000002 NetworkActive: Yes.
+31.10.2017 2:08:40  [Info] [Cerberus] Back-end connection established.
