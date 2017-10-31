@@ -7,7 +7,7 @@ using RakNet.Network;
 using SapphireEngine;
 using Client = EasyAntiCheat.Server.Hydra.Client;
 
-namespace UServer3
+namespace UServer3.Environments
 {
     public class EACServer
     {
@@ -52,7 +52,7 @@ namespace UServer3
             client2connection.Clear();
             connection2client.Clear();
             connection2status.Clear();
-            StreamWriter streamWriter = new StreamWriter("Log.EAC.txt", true)
+            StreamWriter streamWriter = new StreamWriter(AppDomain.CurrentDomain.BaseDirectory + "/Logs/Log.EAC.txt", true)
             {
                 AutoFlush = true
             };

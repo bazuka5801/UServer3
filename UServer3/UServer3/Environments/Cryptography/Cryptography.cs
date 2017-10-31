@@ -1,6 +1,6 @@
 ﻿using System.IO;
 
-namespace UServer3.Cryptography
+namespace UServer3.Environments.Cryptography
 {
     public static class Cryptography
     {

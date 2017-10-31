@@ -35,18 +35,23 @@
   <ItemGroup>
     <Reference Include="EasyAntiCheat.Server, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
       <HintPath>..\Reference\EasyAntiCheat.Server.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="Facepunch.System, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
       <HintPath>..\Reference\Facepunch.System.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="Rust.Data, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
       <HintPath>..\Reference\Rust.Data.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="Rust.Global, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
       <HintPath>..\Reference\Rust.Global.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="SapphireEngine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
       <HintPath>..\Reference\SapphireEngine.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -56,22 +61,30 @@
     <Reference Include="System.Xml" />
     <Reference Include="UnityEngine, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
       <HintPath>..\Reference\UnityEngine.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.UI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
       <HintPath>..\Reference\UnityEngine.UI.dll</HintPath>
+      <Private>False</Private>
     </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Bootstrap.cs" />
-    <Compile Include="EACServer.cs" />
-    <Compile Include="Cryptography\Cryptography.cs" />
-    <Compile Include="Cryptography\NetworkCryptography.cs" />
-    <Compile Include="Cryptography\NetworkCryptographyServer.cs" />
+    <Compile Include="Environments\Cryptography\Cryptography.cs" />
+    <Compile Include="Environments\Cryptography\NetworkCryptography.cs" />
+    <Compile Include="Environments\Cryptography\NetworkCryptographyServer.cs" />
+    <Compile Include="Environments\EACServer.cs" />
+    <Compile Include="Environments\UServer.cs" />
     <Compile Include="Network\NetworkManager.cs" />
     <Compile Include="Network\VirtualServer.cs" />
     <Compile Include="OpCodes.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Rust\BaseCombatEntity.cs" />
+    <Compile Include="Rust\BaseEntity.cs" />
+    <Compile Include="Rust\BaseHeldEntity.cs" />
+    <Compile Include="Rust\BaseNetworkable.cs" />
+    <Compile Include="Rust\BasePlayer.cs" />
     <Compile Include="Settings.cs" />
+    <Compile Include="Struct\UserInformation.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\UServer3.RakNet\UServer3.RakNet.csproj">

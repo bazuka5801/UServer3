@@ -1,7 +1,7 @@
 ﻿using System.IO;
 using RakNet.Network;
 
-namespace UServer3.Cryptography
+namespace UServer3.Environments.Cryptography
 {
     public class NetworkCryptographyServer : NetworkCryptography
     {

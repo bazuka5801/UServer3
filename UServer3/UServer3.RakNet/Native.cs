@@ -12,88 +12,88 @@ namespace RakNet
         {
         }
 
-        [DllImport("RakNet", CharSet=CharSet.None, ExactSpelling=false)]
+        [DllImport("./Data/Bin/RakNet.dll", CharSet=CharSet.None, ExactSpelling=false)]
         public static extern void NET_Close(IntPtr nw);
 
-        [DllImport("RakNet", CharSet=CharSet.None, ExactSpelling=false)]
+        [DllImport("./Data/Bin/RakNet.dll", CharSet=CharSet.None, ExactSpelling=false)]
         public static extern void NET_CloseConnection(IntPtr nw, ulong connectionID);
 
-        [DllImport("RakNet", CharSet=CharSet.None, ExactSpelling=false)]
+        [DllImport("./Data/Bin/RakNet.dll", CharSet=CharSet.None, ExactSpelling=false)]
         public static extern IntPtr NET_Create();
 
-        [DllImport("RakNet", CharSet=CharSet.None, ExactSpelling=false)]
+        [DllImport("./Data/Bin/RakNet.dll", CharSet=CharSet.None, ExactSpelling=false)]
         public static extern IntPtr NET_GetAddress(IntPtr nw, ulong connectionID);
 
-        [DllImport("RakNet", CharSet=CharSet.None, ExactSpelling=false)]
+        [DllImport("./Data/Bin/RakNet.dll", CharSet=CharSet.None, ExactSpelling=false)]
         public static extern int NET_GetAveragePing(IntPtr nw, ulong connectionID);
 
-        [DllImport("RakNet", CharSet=CharSet.None, ExactSpelling=false)]
+        [DllImport("./Data/Bin/RakNet.dll", CharSet=CharSet.None, ExactSpelling=false)]
         public static extern int NET_GetLastPing(IntPtr nw, ulong connectionID);
 
-        [DllImport("RakNet", CharSet=CharSet.None, ExactSpelling=false)]
+        [DllImport("./Data/Bin/RakNet.dll", CharSet=CharSet.None, ExactSpelling=false)]
         public static extern int NET_GetLowestPing(IntPtr nw, ulong connectionID);
 
-        [DllImport("RakNet", CharSet=CharSet.None, ExactSpelling=false)]
+        [DllImport("./Data/Bin/RakNet.dll", CharSet=CharSet.None, ExactSpelling=false)]
         public static extern bool NET_GetStatistics(IntPtr nw, ulong connectionID, ref Native.RaknetStats data, int dataLength);
 
-        [DllImport("RakNet", CharSet=CharSet.None, ExactSpelling=false)]
+        [DllImport("./Data/Bin/RakNet.dll", CharSet=CharSet.None, ExactSpelling=false)]
         public static extern IntPtr NET_GetStatisticsString(IntPtr nw, ulong connectionID);
 
-        [DllImport("RakNet", CharSet=CharSet.None, ExactSpelling=false)]
+        [DllImport("./Data/Bin/RakNet.dll", CharSet=CharSet.None, ExactSpelling=false)]
         public static extern IntPtr NET_LastStartupError(IntPtr nw);
 
-        [DllImport("RakNet", CharSet=CharSet.None, ExactSpelling=false)]
+        [DllImport("./Data/Bin/RakNet.dll", CharSet=CharSet.None, ExactSpelling=false)]
         public static extern bool NET_Receive(IntPtr nw);
 
-        [DllImport("RakNet", CharSet=CharSet.None, ExactSpelling=false)]
+        [DllImport("./Data/Bin/RakNet.dll", CharSet=CharSet.None, ExactSpelling=false)]
         public static extern unsafe void NET_SendMessage(IntPtr nw, byte* data, int length, uint adr, ushort port);
 
-        [DllImport("RakNet", CharSet=CharSet.None, ExactSpelling=false)]
+        [DllImport("./Data/Bin/RakNet.dll", CharSet=CharSet.None, ExactSpelling=false)]
         public static extern int NET_StartClient(IntPtr nw, string hostName, int port, int retries, int retryDelay, int timeout);
 
-        [DllImport("RakNet", CharSet=CharSet.None, ExactSpelling=false)]
+        [DllImport("./Data/Bin/RakNet.dll", CharSet=CharSet.None, ExactSpelling=false)]
         public static extern int NET_StartServer(IntPtr nw, string ip, int port, int maxConnections);
 
-        [DllImport("RakNet", CharSet=CharSet.None, ExactSpelling=false)]
+        [DllImport("./Data/Bin/RakNet.dll", CharSet=CharSet.None, ExactSpelling=false)]
         public static extern uint NETRCV_Address(IntPtr nw);
 
-        [DllImport("RakNet", CharSet=CharSet.None, ExactSpelling=false)]
+        [DllImport("./Data/Bin/RakNet.dll", CharSet=CharSet.None, ExactSpelling=false)]
         public static extern ulong NETRCV_GUID(IntPtr nw);
 
-        [DllImport("RakNet", CharSet=CharSet.None, ExactSpelling=false)]
+        [DllImport("./Data/Bin/RakNet.dll", CharSet=CharSet.None, ExactSpelling=false)]
         public static extern int NETRCV_LengthBits(IntPtr nw);
 
-        [DllImport("RakNet", CharSet=CharSet.None, ExactSpelling=false)]
+        [DllImport("./Data/Bin/RakNet.dll", CharSet=CharSet.None, ExactSpelling=false)]
         public static extern uint NETRCV_Port(IntPtr nw);
 
-        [DllImport("RakNet", CharSet=CharSet.None, ExactSpelling=false)]
+        [DllImport("./Data/Bin/RakNet.dll", CharSet=CharSet.None, ExactSpelling=false)]
         public static extern IntPtr NETRCV_RawData(IntPtr nw);
 
-        [DllImport("RakNet", CharSet=CharSet.None, ExactSpelling=false)]
+        [DllImport("./Data/Bin/RakNet.dll", CharSet=CharSet.None, ExactSpelling=false)]
         public static extern unsafe bool NETRCV_ReadBytes(IntPtr nw, byte* data, int length);
 
-        [DllImport("RakNet", CharSet=CharSet.None, ExactSpelling=false)]
+        [DllImport("./Data/Bin/RakNet.dll", CharSet=CharSet.None, ExactSpelling=false)]
         public static extern void NETRCV_SetReadPointer(IntPtr nw, int bitsOffset);
 
-        [DllImport("RakNet", CharSet=CharSet.None, ExactSpelling=false)]
+        [DllImport("./Data/Bin/RakNet.dll", CharSet=CharSet.None, ExactSpelling=false)]
         public static extern int NETRCV_UnreadBits(IntPtr nw);
 
-        [DllImport("RakNet", CharSet=CharSet.None, ExactSpelling=false)]
+        [DllImport("./Data/Bin/RakNet.dll", CharSet=CharSet.None, ExactSpelling=false)]
         public static extern uint NETSND_Broadcast(IntPtr nw, int priority, int reliability, int channel);
 
-        [DllImport("RakNet", CharSet=CharSet.None, ExactSpelling=false)]
+        [DllImport("./Data/Bin/RakNet.dll", CharSet=CharSet.None, ExactSpelling=false)]
         public static extern float NETSND_ReadCompressedFloat(IntPtr nw);
 
-        [DllImport("RakNet", CharSet=CharSet.None, ExactSpelling=false)]
+        [DllImport("./Data/Bin/RakNet.dll", CharSet=CharSet.None, ExactSpelling=false)]
         public static extern uint NETSND_Send(IntPtr nw, ulong connectionID, int priority, int reliability, int channel);
 
-        [DllImport("RakNet", CharSet=CharSet.None, ExactSpelling=false)]
+        [DllImport("./Data/Bin/RakNet.dll", CharSet=CharSet.None, ExactSpelling=false)]
         public static extern uint NETSND_Size(IntPtr nw);
 
-        [DllImport("RakNet", CharSet=CharSet.None, ExactSpelling=false)]
+        [DllImport("./Data/Bin/RakNet.dll", CharSet=CharSet.None, ExactSpelling=false)]
         public static extern void NETSND_Start(IntPtr nw);
 
-        [DllImport("RakNet", CharSet=CharSet.None, ExactSpelling=false)]
+        [DllImport("./Data/Bin/RakNet.dll", CharSet=CharSet.None, ExactSpelling=false)]
         public static extern unsafe void NETSND_WriteBytes(IntPtr nw, byte* data, int length);
 
         public enum Metrics

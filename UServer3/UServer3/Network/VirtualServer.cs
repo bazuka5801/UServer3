@@ -4,7 +4,10 @@ using ProtoBuf;
 using SapphireEngine;
 using SapphireEngine.Functions;
 using RakNet.Network;
-using UServer3.Cryptography;
+using UnityEngine;
+using UServer2.Struct;
+using UServer3.Environments;
+using UServer3.Environments.Cryptography;
 
 namespace UServer3.Network
 {
@@ -13,6 +16,12 @@ namespace UServer3.Network
         public static Server BaseServer;
         public static Client BaseClient;
 
+        public static UserInformation ConnectionInformation { get; private set; }
+        public static bool IsHaveConnection => ConnectionInformation != null;
+        
+        public static UInt32 LastEntityNUM { get; private set; } = 0;
+        public static UInt32 TakeEntityNUM => ++LastEntityNUM;
+        
         public override void OnAwake()
         {
             this.InitializationNetwork();
@@ -150,6 +159,10 @@ namespace UServer3.Network
                     BaseClient.Connection.decryptIncoming = false;
                     BaseClient.Connection.encryptOutgoing = false;
                 }
+                NetworkManager.Instance.OnDisconnected();
+                
+                ConnectionInformation = null;
+                LastEntityNUM = 0;
             }
             EACServer.OnLeaveGame(conn);
         }
@@ -181,13 +194,16 @@ namespace UServer3.Network
                     BaseClient.Connection.encryptOutgoing = true;
                     return;
                 case Message.Type.GiveUserInformation:
-                    packet.read.UInt8();
-                    goto default;
+                    ConnectionInformation = UserInformation.ParsePacket(packet);
+                    SendPacket(BaseClient, packet);
+                    break;
                 case Message.Type.EAC:
                     EACServer.OnMessageReceived(packet);
-                    goto default;
-                default:
                     SendPacket(BaseClient, packet);
+                    break;
+                default:
+                    if (NetworkManager.Instance.Out_NetworkMessage(packet) == false)
+                        SendPacket(BaseClient, packet);
                     break;
             }
         }
@@ -205,7 +221,8 @@ namespace UServer3.Network
                     break;
                 case Message.Type.EAC:
                     EACServer.OnMessageReceived(packet);
-                    goto default;
+                    SendPacket(BaseServer, packet);
+                    break;
                 case Message.Type.DisconnectReason:
                     SendPacket(BaseServer, packet);
                     if (BaseServer != null && BaseServer.connections.Count > 0)
@@ -216,8 +233,25 @@ namespace UServer3.Network
                         ConsoleSystem.LogWarning("[VirtualServer]: От игрового сервера получена причина дисконнекта: " + reasone);
                     }
                     break;
+                case Message.Type.Entities:
+                    packet.read.UInt32();
+                    using (Entity entity = Entity.Deserialize(packet.read))
+                    {
+                        if (!NetworkManager.Instance.IN_Entity(entity))
+                        {
+                            if (BaseServer.write.Start())
+                            {
+                                BaseServer.write.PacketID(Message.Type.Entities);
+                                BaseServer.write.UInt32(TakeEntityNUM);
+                                entity.WriteToStream(BaseServer.write);
+                                BaseServer.write.Send(new SendInfo(BaseServer.connections[0]));
+                            }
+                        }
+                    }
+                    break;
                 default:
-                    SendPacket(BaseServer, packet);
+                    if (NetworkManager.Instance.IN_NetworkMessage(packet) == false)
+                        SendPacket(BaseServer, packet);
                     break;
             }
         }
