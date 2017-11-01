@@ -1,0 +1,19 @@
+-1386464949 // Bleach
+1891056868  // Duct Tape
+98228420    // Gears
+3175989     // Glue
+1567404401  // Metal Blade
+-1057402571 // Metal Pipe
+1974032895  // Empty Propane Tank
+1939428458  // Rifle Body
+-847065290  // Road Signs
+3506418     // Rope
+1223860752  // Semi Automatic Body
+-419069863  // Sewing Kit
+-1617374968 // Sheet Metal
+-2092529553 // SMG Body
+1835797460  // Metal Spring
+-892259869  // Sticks
+3552619     // Tarp
+1471284746  // Tech T 
+109266897   // Scrap

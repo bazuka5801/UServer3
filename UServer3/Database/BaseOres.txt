@@ -1,0 +1,11 @@
+736323343   // Metal Ore
+916501233   // Stone Ore
+1351790091  // Sulfur Ore
+
+2014621112  // Sand Metal Ore
+2194799002  // Sand Stone Ore
+2324315266  // Sand Sulfur Ore
+
+2680863385  // Snow Metal Ore
+2861041275  // Snow Stone Ore
+1502989249  // Snow Sulfur Ore
