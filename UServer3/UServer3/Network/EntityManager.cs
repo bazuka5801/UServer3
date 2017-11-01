@@ -13,13 +13,14 @@ namespace UServer3.Rust
             var prefabId = entity.baseNetworkable.prefabID;
             if (ent != null)
             {
-                ent.OnEntity(entity);
+                ent.OnEntityUpdate(entity);
+                return ent.OnEntity(entity);
             }
             else
             {
                 if (prefabId == (UInt32) OpCodes.EPrefabUID.BasePlayer)
                 {
-                    new BasePlayer().OnEntityCreate(entity);
+                    ent = new BasePlayer(); ent.OnEntityCreate(entity); return ent.OnEntity(entity);
                 }
 //                else if (prefabId == (UInt32)OpCodes.EPrefabUID.OreBonus)
 //                {
@@ -31,7 +32,7 @@ namespace UServer3.Rust
 //                }
                 else if (entity.heldEntity != null)
                 {
-                    new BaseHeldEntity().OnEntityCreate(entity);
+                    ent = new BaseHeldEntity(); ent.OnEntityCreate(entity); return ent.OnEntity(entity);
                 }
 //                else if (UIDList.Collectables.Contains(prefabId))
 //                {

@@ -237,7 +237,7 @@ namespace UServer3.Network
                     packet.read.UInt32();
                     using (Entity entity = Entity.Deserialize(packet.read))
                     {
-                        if (EntityManager.OnEntity(entity))
+                        if (EntityManager.OnEntity(entity) == false)
                         {
                             if (BaseServer.write.Start())
                             {
