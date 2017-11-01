@@ -64,7 +64,7 @@ namespace UServer3.Functions
                     if (this.m_list_players.Count > 0)
                     {
                         BasePlayer target = null;
-                        float dist = 9999f;
+                        float dist = float.MaxValue;
                         while (this.m_list_players.Count > 0)
                         {
                             TargetAimInformation player = this.m_list_players.Pop();
