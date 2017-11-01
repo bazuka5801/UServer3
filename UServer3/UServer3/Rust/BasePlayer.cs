@@ -84,8 +84,7 @@ namespace UServer3.Rust
         {
             ConsoleSystem.Log("StartLoading");
             
-            ListNetworkables.Clear();
-            ListPlayers.Clear();
+            BaseNetworkable.DestroyAll();
             
             ListNetworkables.Add(this.UID, this);
             ListPlayers.Add(this);

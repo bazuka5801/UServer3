@@ -54,7 +54,7 @@ namespace UServer3.Network
 
         public void OnDisconnected()
         {
-            
+            BaseNetworkable.DestroyAll();
         }
     }
 }
