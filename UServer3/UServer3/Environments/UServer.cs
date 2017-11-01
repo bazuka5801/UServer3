@@ -13,6 +13,7 @@ namespace UServer3.Environments
             ConsoleSystem.OutputPath = Bootstrap.OutputPath;
             ConsoleSystem.Log("[Bootstrap]: Приложение запущено");
             DatabaseLoader.Load<OpCodes>();
+            RPCManager.Initialize();
             this.AddType<VirtualServer>();
             this.AddType<NetworkManager>();
         }

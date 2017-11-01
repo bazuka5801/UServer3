@@ -28,27 +28,41 @@ namespace UServer3.Reflection
 
         public static void Initialize()
         {
-            Type[] assemblyTypes = Assembly.GetExecutingAssembly().GetTypes().Where(type => type.IsAssignableFrom(typeof(BaseNetworkable))).ToArray();
+            Type[] assemblyTypes = Assembly.GetExecutingAssembly().GetTypes()
+                .Where(type => typeof(BaseNetworkable).IsAssignableFrom(type)).ToArray();
 
             for (int i = 0; i < assemblyTypes.Length; ++i)
             {
-                MethodInfo[] typeMethods = assemblyTypes[i].GetMethods(BindingFlags.CreateInstance | BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Static | BindingFlags.Public);
+                var type = assemblyTypes[i];
+                MethodInfo[] typeMethods = type.GetMethods(BindingFlags.CreateInstance | BindingFlags.Instance |
+                                                           BindingFlags.NonPublic | BindingFlags.Static |
+                                                           BindingFlags.Public);
 
                 for (int j = 0; j < typeMethods.Length; ++j)
                 {
-                    object[] customAttributes = typeMethods[j].GetCustomAttributes(typeof(RPCMethodAttribute), true);
+                    var method = typeMethods[j];
+                    object[] customAttributes = method.GetCustomAttributes(typeof(RPCMethodAttribute), true);
 
                     if (customAttributes.Length >= 1)
                     {
                         var methodName = ((RPCMethodAttribute) customAttributes[0]).MethodName;
-                        RPCMethods[methodName] = new FastMethodInfo(typeMethods[j]);
+                        var parameters = method.GetParameters();
+                        if (parameters.Length != 2 || parameters[0].ParameterType != typeof(OpCodes.ERPCNetworkType)
+                            || parameters[1].ParameterType != typeof(Message))
+                        {
+                            ConsoleSystem.LogError($"[RPCManager]: Invalid Parameters for {type.Name}.{method.Name} " +
+                                                   $"({string.Join(", ",parameters.Select(p=>p.ParameterType.Name).ToArray())})\n" +
+                                                   $"Should be ({nameof(OpCodes.ERPCNetworkType)}, {nameof(Message)})");
+                            continue;
+                        }
+                        RPCMethods[methodName] = new FastMethodInfo(method);
                     }
                 }
             }
             ConsoleSystem.Log($"Loaded <{RPCMethods.Count}> RPCMethods!");
         }
 
-        public static bool RunRPCMethod(uint entity, OpCodes.ERPCMethodUID method, OpCodes.ERPCMethodUID networkType, Message message)
+        public static bool RunRPCMethod(uint entity, OpCodes.ERPCMethodUID method, OpCodes.ERPCNetworkType networkType, Message message)
         {
             try
             {
