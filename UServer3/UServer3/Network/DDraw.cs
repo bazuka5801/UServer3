@@ -119,6 +119,11 @@ namespace UServer3.Network
                     {
                         strCommand = strCommand + " \"\"";
                     }
+                    else if (obj2 is float)
+                    {
+                        strCommand = string.Concat(strCommand, " ",
+                            ((float) obj2).ToString("0.0", CultureInfo.InvariantCulture));
+                    }
                     else if (obj2 is Color)
                     {
                         Color color = (Color)obj2;

@@ -126,7 +126,8 @@ namespace UServer3.Rust
 
                 ViewAngles = playerTick.inputState.aimAngles;
                 EyePos = playerTick.eyePos;
-                
+
+                if (IsServerAdmin) return false;
                 if (playerTick.modelState.flying)
                 {
                     playerTick.modelState.flying = false;
@@ -138,17 +139,17 @@ namespace UServer3.Rust
                     if (lastFlying) previousTick.modelState.flying = true;
                     lastFlying = false;
                 }
-                
+
                 if (VirtualServer.BaseClient.write.Start())
                 {
                     VirtualServer.BaseClient.write.PacketID(Message.Type.Tick);
                     playerTick.WriteToStreamDelta(VirtualServer.BaseClient.write, previousTick);
                     previousTick = playerTick.Copy();
-                  
+
                     VirtualServer.BaseClient.Send();
                 }
+                return true;
             }
-            return true;
         }
         #endregion
         
@@ -256,6 +257,7 @@ namespace UServer3.Rust
         #region [Method] SetAdminStatus
         public void SetAdminStatus(bool status)
         {
+            if (IsServerAdmin) return;
             this.SetPlayerFlag(E_PlayerFlags.IsAdmin, status);
 
 

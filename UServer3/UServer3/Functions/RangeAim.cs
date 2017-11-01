@@ -47,15 +47,14 @@ namespace UServer3.Functions
                             if ((BasePlayer.LocalPlayer.IsActiveItem && OpCodes.IsFireWeapon_Prefab((EPrefabUID)BasePlayer.LocalPlayer.ActiveItem.PrefabID) && distance < 150) ||  distance < 50)
                             {
                                 #region [Section] Range and Radius check
-                                Vector3 forward = BasePlayer.LocalPlayer.GetForward() * distance + BasePlayer.LocalPlayer.Position;
-                                forward = new Vector3(forward.x, 0, forward.z);
+                                Vector3 forward = BasePlayer.LocalPlayer.GetForward() * distance + BasePlayer.LocalPlayer.EyePos;
                                 float distance_check = 5f;
                                 
                                 if (distance < 10)
                                     distance_check = distance / 2;
                                 else  if (distance > 30)
                                     distance_check = 9;
-                                float distance_point_and_playuer = Vector3.Distance(forward, new Vector3(BasePlayer.ListPlayers[i].Position.x, 0, BasePlayer.ListPlayers[i].Position.z));
+                                float distance_point_and_playuer = Vector3.Distance(forward, BasePlayer.ListPlayers[i].Position + new Vector3(0,BasePlayer.ListPlayers[i].GetHeight()*0.5f,0));
                                 if (distance_point_and_playuer < distance_check)
                                     m_list_players.Push(new TargetAimInformation { Player = BasePlayer.ListPlayers[i], DistanceCursor =  distance_point_and_playuer});
                                 #endregion
@@ -85,7 +84,7 @@ namespace UServer3.Functions
                     if (this.TargetPlayer != null)
                         DDraw.Text(this.TargetPlayer.Position + new Vector3(0, this.TargetPlayer.GetHeight(), 0), $"<size=32>.</size>", Color.red, 0.1f);
                     if (this.TargetPlayer != null)
-                        DDraw.DrawBox(this.TargetPlayer.Position + new Vector3(0, this.TargetPlayer.GetHeight()*0.5f, 0), this.TargetPlayer.Rotation.ToQuaternion(), new Vector3(1,this.TargetPlayer.GetHeight(), 1), Color.red, 0.1f);
+                        DDraw.DrawBox(this.TargetPlayer.Position + new Vector3(0, this.TargetPlayer.GetHeight()*0.5f, 0), this.TargetPlayer.Rotation.ToQuaternion(), new Vector3(1,this.TargetPlayer.GetHeight(), 1), Color.red, 0.05f);
                 }
                 
                 ///
