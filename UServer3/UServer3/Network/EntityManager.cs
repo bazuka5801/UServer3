@@ -2,6 +2,7 @@
 using ProtoBuf;
 using RakNet.Network;
 using UnityEngine;
+using UServer3.Data;
 
 namespace UServer3.Rust
 {
@@ -18,7 +19,7 @@ namespace UServer3.Rust
             }
             else
             {
-                if (prefabId == (UInt32) OpCodes.EPrefabUID.BasePlayer)
+                if (prefabId == (UInt32) EPrefabUID.BasePlayer)
                 {
                     ent = new BasePlayer(); ent.OnEntityCreate(entity); return ent.OnEntity(entity);
                 }

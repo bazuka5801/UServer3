@@ -3,7 +3,7 @@ using System.IO;
 using RakNet.Network;
 using SapphireEngine;
 
-namespace UServer2.Struct
+namespace UServer3.Struct
 {
     public class UserInformation
     {

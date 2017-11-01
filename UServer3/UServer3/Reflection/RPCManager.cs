@@ -4,6 +4,7 @@ using System.Linq;
 using System.Reflection;
 using RakNet.Network;
 using SapphireEngine;
+using UServer3.Data;
 using UServer3.Rust;
 
 namespace UServer3.Reflection
@@ -12,8 +13,8 @@ namespace UServer3.Reflection
     [AttributeUsage(AttributeTargets.Method)]
     public class RPCMethodAttribute : Attribute
     {
-        public readonly OpCodes.ERPCMethodUID MethodName;
-        public RPCMethodAttribute(OpCodes.ERPCMethodUID method)
+        public readonly ERPCMethodUID MethodName;
+        public RPCMethodAttribute(ERPCMethodUID method)
         {
             MethodName = method;
         }
@@ -22,9 +23,9 @@ namespace UServer3.Reflection
     
     public static class RPCManager
     {
-        private static Dictionary<OpCodes.ERPCMethodUID, FastMethodInfo> RPCMethods = new Dictionary<OpCodes.ERPCMethodUID, FastMethodInfo>();
+        private static Dictionary<ERPCMethodUID, FastMethodInfo> RPCMethods = new Dictionary<ERPCMethodUID, FastMethodInfo>();
 
-        public static bool HasRPCMethod(OpCodes.ERPCMethodUID method) => RPCMethods.ContainsKey(method);
+        public static bool HasRPCMethod(ERPCMethodUID method) => RPCMethods.ContainsKey(method);
 
         public static void Initialize()
         {
@@ -47,12 +48,12 @@ namespace UServer3.Reflection
                     {
                         var methodName = ((RPCMethodAttribute) customAttributes[0]).MethodName;
                         var parameters = method.GetParameters();
-                        if (parameters.Length != 2 || parameters[0].ParameterType != typeof(OpCodes.ERPCNetworkType)
+                        if (parameters.Length != 2 || parameters[0].ParameterType != typeof(ERPCNetworkType)
                             || parameters[1].ParameterType != typeof(Message))
                         {
                             ConsoleSystem.LogError($"[RPCManager]: Invalid Parameters for {type.Name}.{method.Name} " +
                                                    $"({string.Join(", ",parameters.Select(p=>p.ParameterType.Name).ToArray())})\n" +
-                                                   $"Should be ({nameof(OpCodes.ERPCNetworkType)}, {nameof(Message)})");
+                                                   $"Should be ({nameof(ERPCNetworkType)}, {nameof(Message)})");
                             continue;
                         }
                         RPCMethods[methodName] = new FastMethodInfo(method);
@@ -62,7 +63,7 @@ namespace UServer3.Reflection
             ConsoleSystem.Log($"Loaded <{RPCMethods.Count}> RPCMethods!");
         }
 
-        public static bool RunRPCMethod(uint entity, OpCodes.ERPCMethodUID method, OpCodes.ERPCNetworkType networkType, Message message)
+        public static bool RunRPCMethod(uint entity, ERPCMethodUID method, ERPCNetworkType networkType, Message message)
         {
             try
             {

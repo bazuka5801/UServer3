@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using ProtoBuf;
 using RakNet.Network;
+using UServer3.Data;
 using UServer3.Network;
 
 namespace UServer3.Rust
@@ -28,7 +29,7 @@ namespace UServer3.Rust
             {
                 VirtualServer.BaseServer.write.PacketID(Message.Type.RPCMessage);
                 VirtualServer.BaseServer.write.EntityID(this.UID);
-                VirtualServer.BaseServer.write.UInt32((UInt32)OpCodes.ERPCMethodUID.Pickup);
+                VirtualServer.BaseServer.write.UInt32((UInt32)ERPCMethodUID.Pickup);
                 VirtualServer.BaseServer.Send();
             }
         }

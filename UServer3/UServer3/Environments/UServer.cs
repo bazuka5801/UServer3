@@ -1,4 +1,6 @@
 ﻿using SapphireEngine;
+using UServer3.Data;
+using UServer3.Functions;
 using UServer3.Network;
 using UServer3.Reflection;
 
@@ -12,10 +14,11 @@ namespace UServer3.Environments
         {
             ConsoleSystem.OutputPath = Bootstrap.OutputPath;
             ConsoleSystem.Log("[Bootstrap]: Приложение запущено");
-            DatabaseLoader.Load<OpCodes>();
+            DatabaseLoader.Load<Database>();
             RPCManager.Initialize();
             this.AddType<VirtualServer>();
             this.AddType<NetworkManager>();
+            this.AddType<RangeAim>();
         }
     }
 }

@@ -8,8 +8,8 @@ namespace UServer3.Rust
         public Single Health;
         public LifeState State;
 
-        public bool IsDead() => State == LifeState.Dead;
-        public bool IsAlive() => State == LifeState.Alive;
+        public bool IsDead  => State == LifeState.Dead;
+        public bool IsAlive => State == LifeState.Alive;
 
         public override void OnEntityCreate(Entity entity)
         {

@@ -10,6 +10,7 @@ namespace UServer3.Rust
         public static Dictionary<UInt32, BaseNetworkable> ListNetworkables = new Dictionary<uint, BaseNetworkable>();
       
         public static bool HasNetworkable(UInt32 uid) => ListNetworkables.ContainsKey(uid);
+        public static BaseNetworkable Get(UInt32 uid) => ListNetworkables.TryGetValue(uid, out BaseNetworkable entity) ? entity : null;
         public static T Get<T>(UInt32 uid) where T : BaseNetworkable => Get(uid) as T;
         public static void Destroy(UInt32 uid) => Get(uid)?.OnEntityDestroy();
 
@@ -48,16 +49,6 @@ namespace UServer3.Rust
                 var e = ListNetworkables.ElementAt(i);
                 e.Value.OnEntityDestroy();
             }
-        }
-        
-        public static BaseNetworkable Get(UInt32 uid)
-        {
-            BaseNetworkable entity;
-            if (ListNetworkables.TryGetValue(uid, out entity))
-            {
-                return entity;
-            }
-            return null;
         }
     }
 }

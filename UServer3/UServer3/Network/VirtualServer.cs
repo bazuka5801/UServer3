@@ -4,10 +4,10 @@ using ProtoBuf;
 using SapphireEngine;
 using SapphireEngine.Functions;
 using RakNet.Network;
-using UServer2.Struct;
 using UServer3.Environments;
 using UServer3.Environments.Cryptography;
 using UServer3.Rust;
+using UServer3.Struct;
 
 namespace UServer3.Network
 {

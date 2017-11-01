@@ -65,15 +65,22 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Bootstrap.cs" />
+    <Compile Include="Data\Database.cs" />
+    <Compile Include="Data\EPrefabUID.cs" />
+    <Compile Include="Data\ERPCMethodUID.cs" />
+    <Compile Include="Data\ERPCNetworkType.cs" />
+    <Compile Include="Data\E_PlayerFlags.cs" />
+    <Compile Include="Data\OpCodes.cs" />
     <Compile Include="Environments\Cryptography\Cryptography.cs" />
     <Compile Include="Environments\Cryptography\NetworkCryptography.cs" />
     <Compile Include="Environments\Cryptography\NetworkCryptographyServer.cs" />
     <Compile Include="Environments\EACServer.cs" />
     <Compile Include="Environments\UServer.cs" />
+    <Compile Include="Functions\RangeAim.cs" />
+    <Compile Include="Network\DDraw.cs" />
     <Compile Include="Network\EntityManager.cs" />
     <Compile Include="Network\NetworkManager.cs" />
     <Compile Include="Network\VirtualServer.cs" />
-    <Compile Include="OpCodes.cs" />
     <Compile Include="Reflection\DatabaseLoader.cs" />
     <Compile Include="Reflection\FastMethodInfo.cs" />
     <Compile Include="Reflection\RPCManager.cs" />
@@ -85,7 +92,10 @@
     <Compile Include="Rust\BaseResource.cs" />
     <Compile Include="Rust\CollectibleEntity.cs" />
     <Compile Include="Settings.cs" />
+    <Compile Include="Struct\ProjectileHitInfo.cs" />
+    <Compile Include="Struct\TargetAimInformation.cs" />
     <Compile Include="Struct\UserInformation.cs" />
+    <Compile Include="ExMethods\Quaternion.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\UServer3.RakNet\UServer3.RakNet.csproj">

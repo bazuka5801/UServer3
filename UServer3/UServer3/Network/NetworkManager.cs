@@ -1,8 +1,10 @@
 ﻿using System;
 using RakNet.Network;
 using SapphireEngine;
-using UServer2.Struct;
+using UServer3.Data;
 using UServer3.Reflection;
+using UServer3.Rust;
+using UServer3.Struct;
 
 namespace UServer3.Network
 {
@@ -19,7 +21,7 @@ namespace UServer3.Network
             switch (message.type)
             {
                 case Message.Type.RPCMessage:
-                    return OnRPCMessage(OpCodes.ERPCNetworkType.IN, message);
+                    return OnRPCMessage(ERPCNetworkType.IN, message);
                     break;
             }
             return false;
@@ -29,20 +31,25 @@ namespace UServer3.Network
         {
             switch (message.type)
             {
+                case Message.Type.Tick:
+                    if (BasePlayer.IsHaveLocalPlayer)
+                        return BasePlayer.LocalPlayer.OnTick(message);
+                    else return false;
+                    break;
                 case Message.Type.RPCMessage:
-                    return OnRPCMessage(OpCodes.ERPCNetworkType.OUT, message);
+                    return OnRPCMessage(ERPCNetworkType.OUT, message);
                     break;
             }
             return false;
         }
 
-        private static bool OnRPCMessage(OpCodes.ERPCNetworkType type, Message message)
+        private static bool OnRPCMessage(ERPCNetworkType type, Message message)
         {
             UInt32 UID = message.read.EntityID();
             UInt32 rpcId = message.read.UInt32();
             //TODO: Optimize Enum.IsDefined
-            if (!Enum.IsDefined(typeof(OpCodes.ERPCMethodUID), rpcId)) return false;
-            return RPCManager.RunRPCMethod(UID, (OpCodes.ERPCMethodUID) rpcId, type, message);
+            if (!Enum.IsDefined(typeof(ERPCMethodUID), rpcId)) return false;
+            return RPCManager.RunRPCMethod(UID, (ERPCMethodUID) rpcId, type, message);
         }
 
         public void OnDisconnected()
