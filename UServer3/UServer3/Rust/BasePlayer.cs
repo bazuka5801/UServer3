@@ -106,9 +106,10 @@ namespace UServer3.Rust
         #region [Example] [Method] GetForward
         public Vector3 GetForward()
         {
-            //                     Math.PI * this.Rotation.y / 180.0
-            float angle = (float) (this.Rotation.y * 0.01745329251f);
-            return new Vector3((float)Math.Sin(angle), 0, (float)Math.Cos(angle));
+//                                   Math.PI * this.Rotation.y / 180.0
+//            float angle = (float) (this.Rotation.y * 0.01745329251f);
+//            return new Vector3((float)Math.Sin(angle), 0, (float)Math.Cos(angle));
+            return ViewAngles.ToQuaternion() * Vector3.forward;
         }
         #endregion
 
