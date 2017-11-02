@@ -17,42 +17,39 @@ namespace UServer3.Rust
                 ent.OnEntityUpdate(entity);
                 return ent.OnEntity(entity);
             }
-            else
+            
+            if (prefabId == (UInt32) EPrefabUID.BasePlayer)
             {
-                if (prefabId == (UInt32) EPrefabUID.BasePlayer)
-                {
-                    ent = new BasePlayer(); ent.OnEntityCreate(entity); return ent.OnEntity(entity);
-                }
-//                else if (prefabId == (UInt32)OpCodes.EPrefabUID.OreBonus)
-//                {
-//                    new OreBonus(entity);
-//                }
-//                else if (entity.resource != null && OpCodes.EPrefabUID.Ores.Contains(prefabId))
-//                {
-//                    new BaseOre(entity);
-//                }
-                else if (entity.heldEntity != null)
-                {
-                    ent = new BaseHeldEntity(); ent.OnEntityCreate(entity); return ent.OnEntity(entity);
-                }
-//                else if (UIDList.Collectables.Contains(prefabId))
-//                {
-//                    new CollectibleEntity(entity);
-//                }
-//                else if (UIDList.BaseResources.Contains(prefabId))
-//                {
-//                    new BaseResource(entity);
-//                }
-//                else if (entity.worldItem != null && (UIDList.Components.Contains(entity.worldItem.item.itemid)))
-//                {
-//                    new WorldItem(entity);
-//                }
-                else
-                {
-                    new BaseEntity().OnEntityCreate(entity);
-                }
+                ent = new BasePlayer();
             }
-            return false;
+            else if (prefabId == (UInt32) EPrefabUID.OreBonus)
+            {
+                ent = new OreBonus();
+            }
+            else if (entity.resource != null && Database.IsOreResource(prefabId))
+            {
+                ent = new OreResource();
+            }
+            else if (entity.heldEntity != null)
+            {
+                ent = new BaseHeldEntity();
+            }
+            else if (Database.IsCollectible(prefabId))
+            {
+                ent = new CollectibleEntity();
+            }
+            else if (Database.IsBaseResource(prefabId))
+            {
+                new BaseResource();
+            }
+            else if (entity.worldItem != null && Database.IsComponent(entity.worldItem.item.itemid))
+            {
+                new WorldItem();
+            }
+            
+            if (ent == null) return false;
+            ent.OnEntityCreate(entity);
+            return ent.OnEntity(entity);
         }
 
         public static void OnEntityDestroy(Message packet)

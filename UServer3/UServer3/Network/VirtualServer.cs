@@ -279,8 +279,6 @@ namespace UServer3.Network
                     BaseClient.Connection.encryptionLevel = approval.encryption;
                     BaseClient.Connection.decryptIncoming = true;
 
-                    approval.encryption = Settings.GameClient_EncryptionLevel;
-
                     if (BaseServer.write.Start())
                     {
                         BaseServer.write.PacketID(Message.Type.Approved);

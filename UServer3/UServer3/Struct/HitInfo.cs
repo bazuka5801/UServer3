@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace UServer3.Struct
 {
-    public struct ProjectileHitInfo
+    public struct HitInfo
     {
         public UInt32 HitBone;
         public UInt32 HitPartID;

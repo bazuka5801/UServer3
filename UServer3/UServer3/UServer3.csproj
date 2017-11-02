@@ -79,6 +79,7 @@
     <Compile Include="Environments\Rand.cs" />
     <Compile Include="Environments\UServer.cs" />
     <Compile Include="ExtensionMethods\DictionaryEx.cs" />
+    <Compile Include="Functions\MeleeAim.cs" />
     <Compile Include="Functions\RangeAim.cs" />
     <Compile Include="Network\DDraw.cs" />
     <Compile Include="Network\EntityManager.cs" />
@@ -94,8 +95,10 @@
     <Compile Include="Rust\BasePlayer.cs" />
     <Compile Include="Rust\BaseResource.cs" />
     <Compile Include="Rust\CollectibleEntity.cs" />
+    <Compile Include="Rust\OreBonus.cs" />
+    <Compile Include="Rust\OreResource.cs" />
     <Compile Include="Settings.cs" />
-    <Compile Include="Struct\ProjectileHitInfo.cs" />
+    <Compile Include="Struct\HitInfo.cs" />
     <Compile Include="Struct\TargetAimInformation.cs" />
     <Compile Include="Struct\UserInformation.cs" />
     <Compile Include="ExtensionMethods\QuaternionEx.cs" />

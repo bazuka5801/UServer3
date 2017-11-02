@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using ProtoBuf;
+using UnityEngine;
 
 namespace UServer3.Rust
 {
@@ -18,5 +19,7 @@ namespace UServer3.Rust
             base.OnEntityDestroy();
             ListResources.Remove(this);
         }
+
+        public virtual Vector3 GetHitPosition() => base.Position;
     }
 }

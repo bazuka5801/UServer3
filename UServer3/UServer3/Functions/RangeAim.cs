@@ -44,7 +44,7 @@ namespace UServer3.Functions
                         if (BasePlayer.ListPlayers[i].IsLocalPlayer == false && BasePlayer.ListPlayers[i].IsAlive)
                         {
                             float distance = Vector3.Distance(BasePlayer.ListPlayers[i].Position, BasePlayer.LocalPlayer.Position);
-                            if ((BasePlayer.LocalPlayer.IsActiveItem && OpCodes.IsFireWeapon_Prefab((EPrefabUID)BasePlayer.LocalPlayer.ActiveItem.PrefabID) && distance < 150) ||  distance < 50)
+                            if ((BasePlayer.LocalPlayer.HasActiveItem && OpCodes.IsFireWeapon_Prefab((EPrefabUID)BasePlayer.LocalPlayer.ActiveItem.PrefabID) && distance < 150) ||  distance < 50)
                             {
                                 #region [Section] Range and Radius check
                                 Vector3 forward = BasePlayer.LocalPlayer.GetForward() * distance + BasePlayer.LocalPlayer.EyePos;

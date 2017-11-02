@@ -19,7 +19,9 @@ namespace UServer3.Environments
             RPCManager.Initialize();
             this.AddType<VirtualServer>();
             this.AddType<NetworkManager>();
+            
             this.AddType<RangeAim>();
+            this.AddType<MeleeAim>();
         }
     }
 }

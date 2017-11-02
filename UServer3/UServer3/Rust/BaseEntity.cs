@@ -1,4 +1,6 @@
-﻿using ProtoBuf;
+﻿using System;
+using System.Collections.Generic;
+using ProtoBuf;
 using UnityEngine;
 
 namespace UServer3.Rust
@@ -24,6 +26,25 @@ namespace UServer3.Rust
         {
             Position = position;
             Rotation = rotation;
+        }
+        
+        public static T FindNearEntity<T>(List<T> list, float max_distance = float.PositiveInfinity) where T : BaseEntity
+        {
+            if (BasePlayer.LocalPlayer == null) return null;
+            T nearEntity = null;
+            Single min_distance = Single.MaxValue;
+            for (int i = 0; i < list.Count; i++)
+            {
+                var entity = list[i];
+                if (entity == BasePlayer.LocalPlayer) continue;
+                var distance = Vector3.Distance(entity.Position, BasePlayer.LocalPlayer.Position);
+                if (distance < min_distance)
+                {
+                    min_distance = distance;
+                    nearEntity = entity;
+                }
+            }
+            return min_distance < max_distance ? nearEntity : null;
         }
     }
 }

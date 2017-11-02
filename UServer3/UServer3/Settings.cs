@@ -1,22 +1,69 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace UServer3
 {
     public class Settings
     {
-        public static UInt64 Connection1_SteamID = 76561197960279927; // SteamID и OwnerID подключения до игрового сервера
-        public static String Connection1_Username = "garry"; // Username подключения до игрового сервера
-        public static UInt64 Connection2_SteamID = 76561198240345356; // SteamID и OwnerID подключения до игрового клиента
-        public static String Connection2_Username = "Alistair"; // Username подключения до игрового клиента
+        #region [Settings] Connection
+        
+        // SteamID и OwnerID подключения до игрового сервера
+        public static UInt64 Connection1_SteamID = 76561197960279927;
+        
+        // Username подключения до игрового сервера
+        public static String Connection1_Username = "garry";
+        
+        // SteamID и OwnerID подключения до игрового клиента
+        public static UInt64 Connection2_SteamID = 76561198240345356;
+        
+        // Username подключения до игрового клиента
+        public static String Connection2_Username = "Alistair";
+        
+        // IP Сервера к которому будет происходить коннект
+        public static String TargetServer_IP = "127.0.0.1";
+        
+        // Port Сервера к которому будет происходить коннект
+        public static Int32 TargetServer_Port = 12000;
 
-        public static String TargetServer_IP = "127.0.0.1"; // IP Сервера к которому будет происходить коннект
-        public static Int32 TargetServer_Port = 12000; // Port Сервера к которому будет происходить коннект
+        #endregion
 
-        public static UInt32 GameClient_EncryptionLevel = 2; // Уровень шифрования между игровым клиентом и читом
+        #region [Settings] Aimbot_Range
+        
+        // При попадании в статический объект, чит ищет оптимальную цель, засщитывает то попадание по ней
+        public static bool Aimbot_Range_Silent = false;
+        
+        // При Aimbot_Range_Silent, чит попадаёт только в голову противника
+        public static bool Aimbot_Range_AutoHeadshot = false;
+        
+        #endregion
 
-        public static bool Aimbot_Silent = false;
-        public static bool Aimbot_AutoHeadshot = false;
+        #region [Settings] Aimbot_Melee
+        
+        // Если вы держите в руках оружие ближнего боя и враг в радиусе действия оружия, то чит автоматически изуродует врага (даже ручки пачкать не нужно)
+        public static bool Aimbot_Melee_Silent = true;
+        
+        // TODO: Ещё не работает
+        // При Aimbot_Melee_AutoHeadshot, чит бьёт врага только в голову противника
+        public static bool Aimbot_Melee_AutoHeadshot = false;
+        
+        #endregion
+
+        #region [Settings] Other
+
+        // Если вы падаете с большой высоты, то чит уменьшает урон от падения до 1 HP 
         public static bool SmallFallDamage = false;
+        
+        // Друзья, с которыми вы играете
+        public static HashSet<UInt64> Friends = new HashSet<UInt64>();
+        
+        #endregion
+        
+
+        #region [Settings] Methods
+
+        public static bool IsFriend(UInt64 steamid) => Friends.Contains(steamid);
+        
+        #endregion
     }
 }

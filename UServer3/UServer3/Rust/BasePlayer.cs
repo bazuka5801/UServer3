@@ -17,6 +17,7 @@ namespace UServer3.Rust
     public class BasePlayer : BaseCombatEntity
     {
         public static List<BasePlayer> ListPlayers = new List<BasePlayer>();
+        
         public static BasePlayer LocalPlayer = null;
         public static bool IsHaveLocalPlayer => LocalPlayer != null;
         
@@ -29,7 +30,8 @@ namespace UServer3.Rust
         public ModelState ModelState;
         public bool IsSleeping => this.HasPlayerFlag(E_PlayerFlags.Sleeping);
         public bool IsWounded => this.HasPlayerFlag(E_PlayerFlags.Wounded);
-        public bool IsActiveItem => this.ActiveItem != null;
+        public bool CanInteract() => !base.IsDead && !this.IsSleeping && !this.IsWounded;
+        public bool HasActiveItem => this.ActiveItem != null;
         public bool IsLocalPlayer => this == LocalPlayer;
         
         public bool IsDucked => ModelState.ducked;
@@ -79,30 +81,17 @@ namespace UServer3.Rust
                 }
             }
         }
-        
-        [RPCMethod(ERPCMethodUID.StartLoading)]
-        public bool RPC_StartLoading(ERPCNetworkType type, Message message)
-        {
-            ConsoleSystem.Log("StartLoading");
-            
-            BaseNetworkable.DestroyAll();
-            
-            ListNetworkables.Add(this.UID, this);
-            ListPlayers.Add(this);
 
-            return false;
-        }
 
-        
         public void OnChangeActiveItem(UInt32 activeItem)
         {
             this.ActiveItem = (BaseHeldEntity)ListNetworkables[activeItem + 1];
-            if (this.IsLocalPlayer && this.IsActiveItem)
+            if (this.IsLocalPlayer && this.HasActiveItem)
             {
                 ConsoleSystem.Log("You use: " + this.ActiveItem.PrefabID);
             }
         }
-        
+
         #region [Example] [Method] GetForward
         public Vector3 GetForward()
         {
@@ -113,7 +102,6 @@ namespace UServer3.Rust
         }
         #endregion
 
-        
         #region [NetworkMessage] Tick
         private PlayerTick previousTick;
         private PlayerTick previousRecievedTick = new PlayerTick();
@@ -153,14 +141,29 @@ namespace UServer3.Rust
             }
         }
         #endregion
-        
+
+        #region [RPCMethod] StartLoading
+        [RPCMethod(ERPCMethodUID.StartLoading)]
+        private bool RPC_StartLoading(ERPCNetworkType type, Message message)
+        {
+            ConsoleSystem.Log("StartLoading");
+            
+            BaseNetworkable.DestroyAll();
+            
+            ListNetworkables.Add(this.UID, this);
+            ListPlayers.Add(this);
+
+            return false;
+        }
+        #endregion
+
         #region [RPCMethod] OnProjectileAttack
         [RPCMethod(ERPCMethodUID.OnProjectileAttack)]
-        private bool OnProjectileAttack(ERPCNetworkType type, Message message)
+        private bool RPC_OnProjectileAttack(ERPCNetworkType type, Message message)
         {
             EHumanBone GetTargetHit(EHumanBone currentBone)
             {
-                if (Settings.Aimbot_AutoHeadshot) 
+                if (Settings.Aimbot_Range_AutoHeadshot) 
                     return EHumanBone.Head;
                 if (currentBone == EHumanBone.Head) return EHumanBone.Head;
                 // Head or Body
@@ -173,7 +176,7 @@ namespace UServer3.Rust
                 UInt32 hitId = attack.playerAttack.attack.hitID;
                 UInt32 hitBone = attack.playerAttack.attack.hitBone;
                 var hitPlayer = Get<BasePlayer>(hitId);
-                if (Settings.Aimbot_Silent && (hitId == 0 ||
+                if (Settings.Aimbot_Range_Silent && (hitId == 0 ||
                     HasNetworkable(hitId) == false ||
                     hitPlayer == null))
                 {
@@ -202,7 +205,7 @@ namespace UServer3.Rust
 
         #region [RPCMethod] OnPlayerLanded
         [RPCMethod(ERPCMethodUID.OnPlayerLanded)]
-        private bool OnPlayerLanded(ERPCNetworkType type, Message message)
+        private bool RPC_OnPlayerLanded(ERPCNetworkType type, Message message)
         {
             if (Settings.SmallFallDamage == false) return false;
             var fallVelocity = message.read.Float();
@@ -223,7 +226,6 @@ namespace UServer3.Rust
         #endregion
 
         #region [Method] SendRangeAttack
-
         public bool SendRangeAttack(BasePlayer target, EHumanBone typeHit,
             PlayerProjectileAttack parentAttack)
         {
@@ -259,7 +261,6 @@ namespace UServer3.Rust
                     return false;
                 Thread.Sleep(sleep_mlisecond);
             }
-
             #endregion
 
             if (target.IsAlive)
@@ -290,6 +291,27 @@ namespace UServer3.Rust
         }
 
         #endregion
+
+        #region [Method] FindEnemy
+        public static BasePlayer FindEnemy(float radius)
+        {
+            BasePlayer nearPlayer = null;
+            Single min_distance = Single.MaxValue;
+            for (int i = 0; i < ListPlayers.Count; i++)
+            {
+                var player = ListPlayers[i];
+                if (player == LocalPlayer) continue;
+                if (player.Health <= 0) continue;
+                var distance = Vector3.Distance(LocalPlayer.Position, player.Position);
+                if (!Settings.IsFriend(player.SteamID) && distance < min_distance)
+                {
+                    min_distance = distance;
+                    nearPlayer = player;
+                }
+            }
+            return min_distance <= radius ? nearPlayer : null;
+        }
+        #endregion
         
         #region [Method] SetAdminStatus
         public void SetAdminStatus(bool status)
@@ -311,7 +333,7 @@ namespace UServer3.Rust
                     basePlayer = new ProtoBuf.BasePlayer
                     {
                         userid = this.SteamID,
-                        heldEntity = this.IsActiveItem ? this.ActiveItem.UID - 1 : 0,
+                        heldEntity = this.HasActiveItem ? this.ActiveItem.UID - 1 : 0,
                         playerFlags = (int) this.PlayerFlags
                     },
                     baseEntity = new ProtoBuf.BaseEntity
