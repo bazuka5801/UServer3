@@ -241,7 +241,7 @@ namespace UServer3.Rust
                         //ConsoleSystem.Log("This is range weapone");
                         deploy = OpCodes.GetRangeDeploy((EPrefabUID) this.ActiveItem.PrefabID);
                     }
-                    else if (OpCodes.IsMeleWeapon_Prefab((EPrefabUID) this.ActiveItem.PrefabID) == false)
+                    else if (OpCodes.IsMeleeWeapon_Prefab((EPrefabUID) this.ActiveItem.PrefabID) == false)
                     {
                         //ConsoleSystem.Log("This is fire weapone");
                         if (distance_point > 50)

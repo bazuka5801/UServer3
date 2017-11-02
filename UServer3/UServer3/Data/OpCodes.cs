@@ -10,7 +10,7 @@ namespace UServer3.Data
 {
     public static class OpCodes
     {
-        public static bool IsMeleWeapon_Prefab(EPrefabUID prefab) => ListMeleHeald.Contains(prefab);
+        public static bool IsMeleeWeapon_Prefab(EPrefabUID prefab) => ListMeleHeald.Contains(prefab);
         public static bool IsFireWeapon_Prefab(EPrefabUID prefab) => ListFireHeald.Contains(prefab);
         public static bool IsRangeDeploy(EPrefabUID uid) => ListRangeDeploy.ContainsKey(uid);
 
@@ -19,6 +19,7 @@ namespace UServer3.Data
         public static float GetMeleeHeldSpeed(EPrefabUID uid) => ListMeleeHeldSpeed.Get(uid);
         
         public static EHumanBone GetRandomHumanBone(int max = 2) => ListHumanBones[Rand.Int32(0, max)];
+
         
         #region [HashSet] Private HashSet Lists
         private static HashSet<EPrefabUID> ListFireHeald = new HashSet<EPrefabUID>()
@@ -57,7 +58,6 @@ namespace UServer3.Data
             EPrefabUID.PixAxe,
             EPrefabUID.SalvagedPixAxe,
         };
-    
         #endregion
 
         #region [Dictionary] ListRangeDeploy
