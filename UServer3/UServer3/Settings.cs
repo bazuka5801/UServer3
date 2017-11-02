@@ -1,4 +1,5 @@
 ﻿using System;
+using UnityEngine;
 
 namespace UServer3
 {
@@ -13,5 +14,8 @@ namespace UServer3
         public static Int32 TargetServer_Port = 12000; // Port Сервера к которому будет происходить коннект
 
         public static UInt32 GameClient_EncryptionLevel = 2; // Уровень шифрования между игровым клиентом и читом
+
+        public static bool Aimbot_Silent = false;
+        public static bool Aimbot_AutoHeadshot = false;
     }
 }

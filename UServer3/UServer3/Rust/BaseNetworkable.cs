@@ -50,5 +50,7 @@ namespace UServer3.Rust
                 e.Value.OnEntityDestroy();
             }
         }
+
+        public static implicit operator bool(BaseNetworkable obj) => obj != null;
     }
 }

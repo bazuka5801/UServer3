@@ -18,7 +18,7 @@
     <DebugSymbols>false</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
+    <OutputPath>..\Builded\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -69,12 +69,14 @@
     <Compile Include="Data\EPrefabUID.cs" />
     <Compile Include="Data\ERPCMethodUID.cs" />
     <Compile Include="Data\ERPCNetworkType.cs" />
+    <Compile Include="Data\EHumanBone.cs" />
     <Compile Include="Data\E_PlayerFlags.cs" />
     <Compile Include="Data\OpCodes.cs" />
     <Compile Include="Environments\Cryptography\Cryptography.cs" />
     <Compile Include="Environments\Cryptography\NetworkCryptography.cs" />
     <Compile Include="Environments\Cryptography\NetworkCryptographyServer.cs" />
     <Compile Include="Environments\EACServer.cs" />
+    <Compile Include="Environments\Rand.cs" />
     <Compile Include="Environments\UServer.cs" />
     <Compile Include="Functions\RangeAim.cs" />
     <Compile Include="Network\DDraw.cs" />

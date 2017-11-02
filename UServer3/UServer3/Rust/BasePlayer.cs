@@ -6,6 +6,7 @@ using RakNet.Network;
 using SapphireEngine;
 using UnityEngine;
 using UServer3.Data;
+using UServer3.Environments;
 using UServer3.Functions;
 using UServer3.Network;
 using UServer3.Reflection;
@@ -156,27 +157,38 @@ namespace UServer3.Rust
         [RPCMethod(ERPCMethodUID.OnProjectileAttack)]
         public bool OnProjectileAttack(ERPCNetworkType type, Message message)
         {
+            EHumanBone GetTargetHit(UInt32 currentBone)
+            {
+                if (Settings.Aimbot_AutoHeadshot) 
+                    return EHumanBone.Head;
+                
+                return (EHumanBone) Rand.Int32(0, 2);
+            }
             using (PlayerProjectileAttack attack = PlayerProjectileAttack.Deserialize(message.read))
             {
                 UInt32 hitId = attack.playerAttack.attack.hitID;
-                if (hitId == 0 ||
+                UInt32 hitBone = attack.playerAttack.attack.hitBone;
+                var hitPlayer = Get<BasePlayer>(hitId);
+                if (Settings.Aimbot_Silent && (hitId == 0 ||
                     HasNetworkable(hitId) == false ||
-                    (ListNetworkables[hitId] is BasePlayer) == false)
+                    hitPlayer == null))
                 {
                     if (RangeAim.Instance.TargetPlayer != null)
                     {
-                        return this.SendRangeAttack(RangeAim.Instance.TargetPlayer, ProjectileHitInfo.ETargetHit.Head,
+                        EHumanBone typeHit = GetTargetHit(hitBone);
+                        ConsoleSystem.Log(typeHit.ToString());
+                        return this.SendRangeAttack(RangeAim.Instance.TargetPlayer, typeHit,
                             attack);
                     }
                 }
-
-                if (HasNetworkable(hitId) &&
-                    (ListNetworkables[hitId] is BasePlayer) &&
-                    (ListNetworkables[hitId] as BasePlayer).IsAlive)
+                if (hitPlayer && hitPlayer.IsAlive)
                 {
                     RangeAim.Instance.TargetPlayer =
                         (BasePlayer) ListNetworkables[hitId];
-                    return this.SendRangeAttack(RangeAim.Instance.TargetPlayer, ProjectileHitInfo.ETargetHit.Head,
+
+                    EHumanBone typeHit = GetTargetHit(hitBone);
+                    ConsoleSystem.Log(typeHit.ToString());
+                    return this.SendRangeAttack(RangeAim.Instance.TargetPlayer, typeHit,
                         attack);
                 }
             }
@@ -186,7 +198,7 @@ namespace UServer3.Rust
 
         #region [Method] SendRangeAttack
 
-        public bool SendRangeAttack(BasePlayer target, ProjectileHitInfo.ETargetHit typeHit,
+        public bool SendRangeAttack(BasePlayer target, EHumanBone typeHit,
             PlayerProjectileAttack parentAttack)
         {
             #region [Section] Attack Deploy

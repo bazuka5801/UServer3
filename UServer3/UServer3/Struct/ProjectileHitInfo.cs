@@ -9,13 +9,5 @@ namespace UServer3.Struct
         public UInt32 HitPartID;
         public Vector3 HitLocalPos;
         public Vector3 HitNormalPos;
-        
-        
-        public enum ETargetHit
-        {
-            Head,
-            Body,
-            Legs
-        }
     }
 }

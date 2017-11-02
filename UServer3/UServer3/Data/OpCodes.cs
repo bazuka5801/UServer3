@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using UnityEngine;
+using UServer3.Environments;
 using UServer3.Struct;
 
 namespace UServer3.Data
@@ -13,9 +15,11 @@ namespace UServer3.Data
         public static bool IsRangeDeploy(EPrefabUID uid) => ListRangeDeploy.ContainsKey(uid);
 
         public static float GetRangeDeploy(EPrefabUID uid) => ListRangeDeploy.Get(uid);
-        public static ProjectileHitInfo GetTargetHitInfo(ProjectileHitInfo.ETargetHit targetHit) => ListTargetHit.Get(targetHit);
+        public static ProjectileHitInfo GetTargetHitInfo(EHumanBone humanBone) => ListProjectileHumanHits.Get(humanBone);
         public static float GetMeleeHeldSpeed(EPrefabUID uid) => ListMeleeHeldSpeed.Get(uid);
         
+        public static EHumanBone GetHumanBone(UInt32 boneId) => ListUIDToHumanBone.Get(boneId);
+        public static EHumanBone GetRandomHumanBone() => ListHumanBones.GetRandom();
         
         #region [HashSet] Private HashSet Lists
         private static HashSet<EPrefabUID> ListFireHeald = new HashSet<EPrefabUID>()
@@ -56,15 +60,28 @@ namespace UServer3.Data
         };
     
         #endregion
-        
+
         #region [Dictionary] ListRangeDeploy
+
         private static Dictionary<EPrefabUID, float> ListRangeDeploy = new Dictionary<EPrefabUID, float>()
         {
             { EPrefabUID.Bow, 5 },
             { EPrefabUID.CrossBow, 4f }
         };
+
         #endregion
+
+        #region [List] ListHumanBones
+        private static List<EHumanBone> ListHumanBones = new List<EHumanBone>()
+        {
+            EHumanBone.Head,
+            EHumanBone.Body,
+            EHumanBone.Legs
+        };
+        #endregion
+        
         #region [Dictionary] ListMeleeHeldSpeed
+
         private static Dictionary<EPrefabUID, float> ListMeleeHeldSpeed = new Dictionary<EPrefabUID, float>()
         {
             [EPrefabUID.StonePixAxe] = 0.45f,
@@ -83,12 +100,23 @@ namespace UServer3.Data
             [EPrefabUID.PixAxe] = 0.75f,
             [EPrefabUID.Rock] = 0.65f
         };
+
         #endregion
-        #region [Dictionary] ListTargetHit
-        private static Dictionary<ProjectileHitInfo.ETargetHit, ProjectileHitInfo> ListTargetHit = new Dictionary<ProjectileHitInfo.ETargetHit, ProjectileHitInfo>()
+
+        #region [Dictionary] BoneToTargetHit
+        private static Dictionary<UInt32, EHumanBone> ListUIDToHumanBone = new Dictionary<UInt32, EHumanBone>()
+        {
+            [3198432] = EHumanBone.Head,
+            [1036806628] = EHumanBone.Body,
+            [3354754288] = EHumanBone.Legs,
+        };
+        #endregion
+        
+        #region [Dictionary] ListProjectileHumanHits
+        private static Dictionary<EHumanBone, ProjectileHitInfo> ListProjectileHumanHits = new Dictionary<EHumanBone, ProjectileHitInfo>()
         {
             {
-                ProjectileHitInfo.ETargetHit.Head, new ProjectileHitInfo
+                EHumanBone.Head, new ProjectileHitInfo
                 {
                     HitBone = 3198432,
                     HitPartID = 1744899316,
@@ -97,7 +125,7 @@ namespace UServer3.Data
                 }
             },
             {
-                ProjectileHitInfo.ETargetHit.Body, new ProjectileHitInfo
+                EHumanBone.Body, new ProjectileHitInfo
                 {
                     HitBone = 1036806628,
                     HitPartID = 1890214305,
@@ -106,7 +134,7 @@ namespace UServer3.Data
                 }
             },
             {
-                ProjectileHitInfo.ETargetHit.Legs, new ProjectileHitInfo
+                EHumanBone.Legs, new ProjectileHitInfo
                 {
                     HitBone = 3354754288,
                     HitPartID = 1541911865,
