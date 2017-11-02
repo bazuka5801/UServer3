@@ -18,8 +18,7 @@ namespace UServer3.Data
         public static ProjectileHitInfo GetTargetHitInfo(EHumanBone humanBone) => ListProjectileHumanHits.Get(humanBone);
         public static float GetMeleeHeldSpeed(EPrefabUID uid) => ListMeleeHeldSpeed.Get(uid);
         
-        public static EHumanBone GetHumanBone(UInt32 boneId) => ListUIDToHumanBone.Get(boneId);
-        public static EHumanBone GetRandomHumanBone() => ListHumanBones.GetRandom();
+        public static EHumanBone GetRandomHumanBone(int max = 2) => ListHumanBones[Rand.Int32(0, max)];
         
         #region [HashSet] Private HashSet Lists
         private static HashSet<EPrefabUID> ListFireHeald = new HashSet<EPrefabUID>()
@@ -101,15 +100,6 @@ namespace UServer3.Data
             [EPrefabUID.Rock] = 0.65f
         };
 
-        #endregion
-
-        #region [Dictionary] BoneToTargetHit
-        private static Dictionary<UInt32, EHumanBone> ListUIDToHumanBone = new Dictionary<UInt32, EHumanBone>()
-        {
-            [3198432] = EHumanBone.Head,
-            [1036806628] = EHumanBone.Body,
-            [3354754288] = EHumanBone.Legs,
-        };
         #endregion
         
         #region [Dictionary] ListProjectileHumanHits

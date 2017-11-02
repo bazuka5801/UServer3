@@ -1,9 +1,11 @@
-﻿namespace UServer3.Data
+﻿using System;
+
+namespace UServer3.Data
 {
-    public enum EHumanBone
+    public enum EHumanBone : UInt32
     {
-        Head,
-        Body,
-        Legs
+        Head = 3198432,
+        Body = 1036806628,
+        Legs = 3354754288
     }
 }

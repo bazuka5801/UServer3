@@ -157,12 +157,15 @@ namespace UServer3.Rust
         [RPCMethod(ERPCMethodUID.OnProjectileAttack)]
         public bool OnProjectileAttack(ERPCNetworkType type, Message message)
         {
-            EHumanBone GetTargetHit(UInt32 currentBone)
+            EHumanBone GetTargetHit(EHumanBone currentBone)
             {
                 if (Settings.Aimbot_AutoHeadshot) 
                     return EHumanBone.Head;
-                
-                return (EHumanBone) Rand.Int32(0, 2);
+                if (currentBone == EHumanBone.Head) return EHumanBone.Head;
+                // Head or Body
+                if (currentBone == EHumanBone.Body) return OpCodes.GetRandomHumanBone(1);
+                // Head or Body or Legs
+                return OpCodes.GetRandomHumanBone(2);
             }
             using (PlayerProjectileAttack attack = PlayerProjectileAttack.Deserialize(message.read))
             {
@@ -175,7 +178,7 @@ namespace UServer3.Rust
                 {
                     if (RangeAim.Instance.TargetPlayer != null)
                     {
-                        EHumanBone typeHit = GetTargetHit(hitBone);
+                        EHumanBone typeHit = GetTargetHit(0);
                         ConsoleSystem.Log(typeHit.ToString());
                         return this.SendRangeAttack(RangeAim.Instance.TargetPlayer, typeHit,
                             attack);
@@ -186,7 +189,7 @@ namespace UServer3.Rust
                     RangeAim.Instance.TargetPlayer =
                         (BasePlayer) ListNetworkables[hitId];
 
-                    EHumanBone typeHit = GetTargetHit(hitBone);
+                    EHumanBone typeHit = GetTargetHit((EHumanBone)hitBone);
                     ConsoleSystem.Log(typeHit.ToString());
                     return this.SendRangeAttack(RangeAim.Instance.TargetPlayer, typeHit,
                         attack);
