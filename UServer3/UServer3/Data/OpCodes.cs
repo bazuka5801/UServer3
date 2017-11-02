@@ -144,19 +144,5 @@ namespace UServer3.Data
             }
         };
         #endregion
-
-        #region [Dictionary] Get
-        private static Value Get<Key, Value>(this Dictionary<Key, Value> dictionary, Key key)
-        {
-            if (dictionary.TryGetValue(key, out Value value)) return value;
-            
-            StackFrame frame = new StackFrame(1, true);
-            var method = frame.GetMethod();
-            var methodName = method.Name;
-            var paramaName = method.GetParameters()[0].Name;
-            var methodClass = method.DeclaringType.Name;
-            throw new ArgumentException($"[{methodClass}] {methodName}", nameof(paramaName));
-        }
-        #endregion
     }
 }

@@ -78,6 +78,7 @@
     <Compile Include="Environments\EACServer.cs" />
     <Compile Include="Environments\Rand.cs" />
     <Compile Include="Environments\UServer.cs" />
+    <Compile Include="ExtensionMethods\DictionaryEx.cs" />
     <Compile Include="Functions\RangeAim.cs" />
     <Compile Include="Network\DDraw.cs" />
     <Compile Include="Network\EntityManager.cs" />
@@ -97,7 +98,7 @@
     <Compile Include="Struct\ProjectileHitInfo.cs" />
     <Compile Include="Struct\TargetAimInformation.cs" />
     <Compile Include="Struct\UserInformation.cs" />
-    <Compile Include="ExMethods\Quaternion.cs" />
+    <Compile Include="ExtensionMethods\QuaternionEx.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\UServer3.RakNet\UServer3.RakNet.csproj">
