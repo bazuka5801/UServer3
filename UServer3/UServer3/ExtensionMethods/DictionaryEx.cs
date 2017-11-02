@@ -6,7 +6,7 @@ namespace UServer3
 {
     public static class DictionaryEx
     {
-        private static Value Get<Key, Value>(this Dictionary<Key, Value> dictionary, Key key)
+        public static Value Get<Key, Value>(this Dictionary<Key, Value> dictionary, Key key)
         {
             if (dictionary.TryGetValue(key, out Value value)) return value;
             
