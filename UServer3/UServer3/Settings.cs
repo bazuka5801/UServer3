@@ -17,5 +17,6 @@ namespace UServer3
 
         public static bool Aimbot_Silent = false;
         public static bool Aimbot_AutoHeadshot = false;
+        public static bool SmallFallDamage = false;
     }
 }

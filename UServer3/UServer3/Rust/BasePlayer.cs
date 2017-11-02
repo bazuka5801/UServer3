@@ -113,7 +113,8 @@ namespace UServer3.Rust
         }
         #endregion
 
-        #region [Message] Tick
+        
+        #region [NetworkMessage] Tick
         private PlayerTick previousTick;
         private PlayerTick previousRecievedTick = new PlayerTick();
         private bool lastFlying = false;
@@ -155,7 +156,7 @@ namespace UServer3.Rust
         
         #region [RPCMethod] OnProjectileAttack
         [RPCMethod(ERPCMethodUID.OnProjectileAttack)]
-        public bool OnProjectileAttack(ERPCNetworkType type, Message message)
+        private bool OnProjectileAttack(ERPCNetworkType type, Message message)
         {
             EHumanBone GetTargetHit(EHumanBone currentBone)
             {
@@ -193,6 +194,28 @@ namespace UServer3.Rust
                     ConsoleSystem.Log(typeHit.ToString());
                     return this.SendRangeAttack(RangeAim.Instance.TargetPlayer, typeHit,
                         attack);
+                }
+            }
+            return false;
+        }
+        #endregion
+
+        #region [RPCMethod] OnPlayerLanded
+        [RPCMethod(ERPCMethodUID.OnPlayerLanded)]
+        private bool OnPlayerLanded(ERPCNetworkType type, Message message)
+        {
+            if (Settings.SmallFallDamage == false) return false;
+            var fallVelocity = message.read.Float();
+            if (fallVelocity < -8f)
+            {
+                if (VirtualServer.BaseClient.write.Start())
+                {
+                    VirtualServer.BaseClient.write.PacketID(Message.Type.RPCMessage);
+                    VirtualServer.BaseClient.write.EntityID(UID);
+                    VirtualServer.BaseClient.write.UInt32((UInt32)ERPCMethodUID.OnPlayerLanded);
+                    VirtualServer.BaseClient.write.Float(Rand.Float(-15.5f, -15.1f));
+                    VirtualServer.BaseClient.Send();
+                    return true;
                 }
             }
             return false;
