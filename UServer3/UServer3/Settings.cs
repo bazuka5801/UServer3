@@ -24,7 +24,7 @@ namespace UServer3
         public static String TargetServer_IP = "127.0.0.1";
         
         // Port Сервера к которому будет происходить коннект
-        public static Int32 TargetServer_Port = 12000;
+        public static Int32 TargetServer_Port = 28015; //12000
 
         #endregion
 

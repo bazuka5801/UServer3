@@ -121,8 +121,8 @@ namespace UServer3.Rust.Network
                         BaseClient.Connection.username = Settings.Connection1_Username;
                         BaseClient.Connection.authLevel = 1;
                         EACServer.OnJoinGame(BaseClient.Connection);
-                        EACServer.OnStartLoading(BaseClient.Connection);
-                        EACServer.OnFinishLoading(BaseClient.Connection);
+                        //EACServer.OnStartLoading(BaseClient.Connection);
+                        //EACServer.OnFinishLoading(BaseClient.Connection);
 
                         BaseServer.connections[0].ipaddress = "127.0.0.1";
                         BaseServer.connections[0].userid = Settings.Connection2_SteamID;
@@ -130,8 +130,8 @@ namespace UServer3.Rust.Network
                         BaseServer.connections[0].username = Settings.Connection2_Username;
                         BaseServer.connections[0].authLevel = 1;
                         EACServer.OnJoinGame(BaseServer.connections[0]);
-                        EACServer.OnStartLoading(BaseServer.connections[0]);
-                        EACServer.OnFinishLoading(BaseServer.connections[0]);
+                        //EACServer.OnStartLoading(BaseServer.connections[0]);
+                        //EACServer.OnFinishLoading(BaseServer.connections[0]);
                         ConsoleSystem.Log("[VirtualServer]: Инициализация подключения успешно завершена!");
                     }
                     else

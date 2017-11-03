@@ -143,12 +143,21 @@ namespace UServer3.Rust
         }
         #endregion
 
+        [RPCMethod(ERPCMethodUID.FinishLoading)]
+        private bool RPC_FinishLoading(ERPCNetworkType type, Message message)
+        {
+            EACServer.OnFinishLoading(VirtualServer.BaseClient.Connection);
+            EACServer.OnFinishLoading(VirtualServer.BaseServer.connections[0]);
+            return false;
+        }
+        
         #region [RPCMethod] StartLoading
         [RPCMethod(ERPCMethodUID.StartLoading)]
         private bool RPC_StartLoading(ERPCNetworkType type, Message message)
         {
             ConsoleSystem.Log("StartLoading");
-            
+            EACServer.OnStartLoading(VirtualServer.BaseClient.Connection);
+            EACServer.OnStartLoading(VirtualServer.BaseServer.connections[0]);
             BaseNetworkable.DestroyAll();
             
             ListNetworkables.Add(this.UID, this);

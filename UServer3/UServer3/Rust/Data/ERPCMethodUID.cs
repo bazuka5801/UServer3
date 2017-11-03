@@ -5,6 +5,7 @@ namespace UServer3.Rust.Data
     public enum ERPCMethodUID : UInt32
     {
         OnPlayerLanded =             2248815946, // падение игрока
+        FinishLoading =              1052678473,
         StartLoading =               2832517786,
         OnModelState =               3470646823,
         UpdateMetabolism =           2310938162,
