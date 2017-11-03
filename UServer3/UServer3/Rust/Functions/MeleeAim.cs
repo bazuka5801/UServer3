@@ -24,7 +24,8 @@ namespace UServer3.Rust.Functions
                 m_Cooldown -= DeltaTime;
                 var prefabId = (EPrefabUID) BasePlayer.LocalPlayer.ActiveItem.PrefabID;
                 var speed = OpCodes.GetMeleeHeldSpeed(prefabId);
-
+                if (Settings.Aimbot_Melee_Fast == false) speed *= 1.8f;
+                
                 // Если меняем оружие ближнего боя, то ставим кд 1, чтобы при смене оружие не было CooldownHack
                 if (LastMeleePrefabUID != BasePlayer.LocalPlayer.ActiveItem.PrefabID)
                 {

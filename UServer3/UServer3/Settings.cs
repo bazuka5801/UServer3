@@ -44,8 +44,11 @@ namespace UServer3
         public static bool Aimbot_Melee_Silent = true;
         
         // TODO: Ещё не работает
-        // При Aimbot_Melee_AutoHeadshot, чит бьёт врага только в голову противника
+        // При Aimbot_Melee_Silent, чит бьёт врага только в голову противника
         public static bool Aimbot_Melee_AutoHeadshot = false;
+        
+        // При Aimbot_Melee_Silent, чит бьёт в два раза быстрее
+        public static bool Aimbot_Melee_Fast = false;
         
         #endregion
 
