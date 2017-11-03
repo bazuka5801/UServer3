@@ -5,7 +5,7 @@ using System.Linq;
 using System.Reflection;
 using SapphireEngine;
 
-namespace UServer3.Reflection
+namespace UServer3.CSharp.Reflection
 {
     public static class DatabaseLoader
     {

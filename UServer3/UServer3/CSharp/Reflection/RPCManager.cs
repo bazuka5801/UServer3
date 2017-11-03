@@ -7,7 +7,7 @@ using SapphireEngine;
 using UServer3.Data;
 using UServer3.Rust;
 
-namespace UServer3.Reflection
+namespace UServer3.CSharp.Reflection
 {
     #region [Attribute] [RPCMethodAttribute] RPC Method Attribute  
     [AttributeUsage(AttributeTargets.Method)]

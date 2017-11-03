@@ -60,6 +60,7 @@ namespace UServer3.Environments
             Log.Prefix = string.Empty;
             Log.Level = LogLevel.Info;
             easyAntiCheat = new EasyAntiCheatServer<Client>(HandleClientUpdate, 20, "My Server Name");
+            UServer3.CSharp.ExtensionMethods.ConsoleEx.ClearCurrentConsoleLine();
         }
 
         public static void DoUpdate() => easyAntiCheat?.HandleClientUpdates();

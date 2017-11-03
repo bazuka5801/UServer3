@@ -2,7 +2,7 @@
 using System.Linq.Expressions;
 using System.Reflection;
 
-namespace UServer3.Reflection
+namespace UServer3.CSharp.Reflection
 {
     public class FastMethodInfo
     {

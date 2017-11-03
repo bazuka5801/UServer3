@@ -50,10 +50,10 @@ namespace UServer3.Network
         {
             try
             {
-                ConsoleSystem.Log("[VirtualServer]: Служба EAC запускается...");
+                ConsoleSystem.Log("[VirtualServer]: ParseEncryptionHash запускается...");
                 EACServer.DoStartup();
                 Timer.SetInterval(EACServer.DoUpdate, 1f);
-                ConsoleSystem.Log("[VirtualServer]: Служба EAC успешно запущена!");
+                ConsoleSystem.Log("[VirtualServer]: ParseEncryptionHash успешно запущен!");
             }
             catch (Exception ex)
             {

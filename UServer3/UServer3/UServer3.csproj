@@ -65,6 +65,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Bootstrap.cs" />
+    <Compile Include="CSharp\ExtensionMethods\ConsoleEx.cs" />
+    <Compile Include="CSharp\ExtensionMethods\DictionaryEx.cs" />
+    <Compile Include="CSharp\ExtensionMethods\QuaternionEx.cs" />
+    <Compile Include="CSharp\Reflection\DatabaseLoader.cs" />
+    <Compile Include="CSharp\Reflection\FastMethodInfo.cs" />
+    <Compile Include="CSharp\Reflection\RPCManager.cs" />
     <Compile Include="Data\Database.cs" />
     <Compile Include="Data\EPrefabUID.cs" />
     <Compile Include="Data\ERPCMethodUID.cs" />
@@ -78,16 +84,12 @@
     <Compile Include="Environments\EACServer.cs" />
     <Compile Include="Environments\Rand.cs" />
     <Compile Include="Environments\UServer.cs" />
-    <Compile Include="ExtensionMethods\DictionaryEx.cs" />
     <Compile Include="Functions\MeleeAim.cs" />
     <Compile Include="Functions\RangeAim.cs" />
     <Compile Include="Network\DDraw.cs" />
     <Compile Include="Network\EntityManager.cs" />
     <Compile Include="Network\NetworkManager.cs" />
     <Compile Include="Network\VirtualServer.cs" />
-    <Compile Include="Reflection\DatabaseLoader.cs" />
-    <Compile Include="Reflection\FastMethodInfo.cs" />
-    <Compile Include="Reflection\RPCManager.cs" />
     <Compile Include="Rust\BaseCombatEntity.cs" />
     <Compile Include="Rust\BaseEntity.cs" />
     <Compile Include="Rust\BaseHeldEntity.cs" />
@@ -101,7 +103,6 @@
     <Compile Include="Struct\HitInfo.cs" />
     <Compile Include="Struct\TargetAimInformation.cs" />
     <Compile Include="Struct\UserInformation.cs" />
-    <Compile Include="ExtensionMethods\QuaternionEx.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\UServer3.RakNet\UServer3.RakNet.csproj">

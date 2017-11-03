@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 
-namespace UServer3
+namespace UServer3.CSharp.ExtensionMethods
 {
     public static class DictionaryEx
     {

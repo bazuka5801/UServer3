@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace UServer3
+namespace UServer3.CSharp.ExtensionMethods
 {
     public static class QuaternionEx
     {
