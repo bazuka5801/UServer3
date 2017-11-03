@@ -27,5 +27,6 @@ namespace UServer3.Rust.Data
         Assist =                     540658179,  // само поднятия
         StartReload =                3302290555, //начало перезарядки
         Reload =                     3360326041, //конец перезарядки
+        ClientKeepConnectionAlive =  2177997023, // Desync time
     }
 }

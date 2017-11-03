@@ -27,10 +27,10 @@ namespace UServer3.Rust.Data
         PixAxe          = 859655528,  // Железная кирка
         SalvagedPixAxe  = 2979271826, // Ледоруб
 
-
         // Range Weapons
         Bow             = 1500609170, // Лук
         CrossBow        = 4194868556, // Арбалет
+        NailGun         = 486304546,  // Гвоздомёт
 
         LR300           = 4110837928, // LR300
         Bolt            = 2208341389, // Болтовка

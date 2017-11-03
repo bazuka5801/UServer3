@@ -24,17 +24,17 @@ namespace UServer3
         public static String TargetServer_IP = "127.0.0.1";
         
         // Port Сервера к которому будет происходить коннект
-        public static Int32 TargetServer_Port = 28015; //12000
+        public static Int32 TargetServer_Port = 12000; //28015
 
         #endregion
 
         #region [Settings] Aimbot_Range
         
         // При попадании в статический объект, чит ищет оптимальную цель, засщитывает то попадание по ней
-        public static bool Aimbot_Range_Silent = false;
+        public static bool Aimbot_Range_Silent = true;
         
         // При Aimbot_Range_Silent, чит попадаёт только в голову противника
-        public static bool Aimbot_Range_AutoHeadshot = false;
+        public static bool Aimbot_Range_AutoHeadshot = true;
         
         #endregion
 

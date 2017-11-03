@@ -69,6 +69,7 @@ namespace UServer3.Rust
             {
                 SteamID = entity.basePlayer.userid;
                 Username = entity.basePlayer.name;
+                PlayerFlags = (E_PlayerFlags) entity.basePlayer.playerFlags;
                 if (entity.basePlayer.modelState != null)
                     ModelState = entity.basePlayer.modelState.Copy();
                 if (HasPlayerFlag(E_PlayerFlags.IsAdmin))
@@ -108,15 +109,20 @@ namespace UServer3.Rust
         private PlayerTick previousRecievedTick = new PlayerTick();
         private bool lastFlying = false;
 
+        private int spend = 0;
         public bool OnTick(Message packet)
         {
             using (PlayerTick playerTick = PlayerTick.Deserialize(packet.read, previousRecievedTick, true))
             {
                 previousRecievedTick = playerTick.Copy();
-
                 ViewAngles = playerTick.inputState.aimAngles;
                 EyePos = playerTick.eyePos;
-
+//                spend++;
+//                if (spend < 8)
+//                {
+//                    return true;
+//                }
+//                spend = 0;
                 if (IsServerAdmin) return false;
                 if (playerTick.modelState.flying)
                 {
@@ -143,6 +149,7 @@ namespace UServer3.Rust
         }
         #endregion
 
+        
         [RPCMethod(ERPCMethodUID.FinishLoading)]
         private bool RPC_FinishLoading(ERPCNetworkType type, Message message)
         {
@@ -283,11 +290,18 @@ namespace UServer3.Rust
                 parentAttack.playerAttack.attack.hitPositionLocal = hitInfo.HitLocalPos;
                 parentAttack.playerAttack.attack.hitID = target.UID;
 
-                float height = this.GetHeight();
-                parentAttack.playerAttack.attack.hitPositionWorld = target.Position + new Vector3(0, height, 0);
-                parentAttack.playerAttack.attack.hitNormalWorld = target.Position + new Vector3(0, height, 0);
-                parentAttack.playerAttack.attack.pointEnd = target.Position + new Vector3(0, height, 0);
+                float height = target.GetHeight();
 
+                var pos = target.Position + new Vector3(0, height, 0) + new Vector3(0,100,0);
+                //DDraw.Arrow(target.Position + new Vector3(0, height, 0), pos, 0.1f, Color.blue, 15f);
+                parentAttack.playerAttack.attack.hitPositionWorld = pos;
+                parentAttack.playerAttack.attack.hitNormalWorld = pos;
+                parentAttack.playerAttack.attack.pointEnd = pos;
+
+//                var forward = GetForward();
+//                parentAttack.playerAttack.attack.hitPositionWorld = EyePos + GetForward();
+//                parentAttack.playerAttack.attack.hitNormalWorld = EyePos + GetForward();
+//                parentAttack.playerAttack.attack.pointEnd = EyePos + GetForward();
 
                 VirtualServer.BaseClient.write.Start();
                 VirtualServer.BaseClient.write.PacketID(Message.Type.RPCMessage);

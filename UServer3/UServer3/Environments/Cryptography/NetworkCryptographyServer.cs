@@ -10,7 +10,7 @@ namespace UServer3.Environments.Cryptography
         {
             if (connection.encryptionLevel <= 1)
             {
-                Cryptography.XOR(0x7eb, src, srcOffset, dst, dstOffset);
+                Cryptography.XOR(2031, src, srcOffset, dst, dstOffset);
             }
             else
             {
@@ -22,7 +22,7 @@ namespace UServer3.Environments.Cryptography
         {
             if (connection.encryptionLevel <= 1)
             {
-                Cryptography.XOR(0x7eb, src, srcOffset, dst, dstOffset);
+                Cryptography.XOR(2031, src, srcOffset, dst, dstOffset);
             }
             else
             {
