@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace UServer3.Data
+namespace UServer3.Rust.Data
 {
     public enum ERPCMethodUID : UInt32
     {

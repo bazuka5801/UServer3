@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using ProtoBuf;
 using RakNet.Network;
-using UServer3.Data;
-using UServer3.Network;
+using UServer3.Rust.Network;
+using UServer3.Rust.Data;
 
 namespace UServer3.Rust
 {

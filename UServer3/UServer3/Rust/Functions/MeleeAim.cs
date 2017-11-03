@@ -1,9 +1,8 @@
 ﻿using System;
 using SapphireEngine;
-using UServer3.Data;
-using UServer3.Rust;
+using UServer3.Rust.Data;
 
-namespace UServer3.Functions
+namespace UServer3.Rust.Functions
 {
     public class MeleeAim : SapphireType
     {

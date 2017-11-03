@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using SapphireEngine;
 using UnityEngine;
-using UServer3.Network;
+using UServer3.Rust.Network;
 using UServer3.Rust;
-using UServer3.Data;
-using UServer3.Struct;
+using UServer3.Rust.Struct;
 using  UServer3.CSharp.ExtensionMethods;
+using UServer3.Rust.Data;
+using UServer3.Rust.Struct;
 
-namespace UServer3.Functions
+namespace UServer3.Rust.Functions
 {
     public class RangeAim : SapphireType
     {

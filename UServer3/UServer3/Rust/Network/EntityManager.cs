@@ -2,9 +2,9 @@
 using ProtoBuf;
 using RakNet.Network;
 using UnityEngine;
-using UServer3.Data;
+using UServer3.Rust.Data;
 
-namespace UServer3.Rust
+namespace UServer3.Rust.Rust
 {
     public static class EntityManager
     {

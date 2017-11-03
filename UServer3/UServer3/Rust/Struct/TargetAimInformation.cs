@@ -1,6 +1,4 @@
-﻿using UServer3.Rust;
-
-namespace UServer3.Struct
+﻿namespace UServer3.Rust.Struct
 {
     public struct TargetAimInformation
     {

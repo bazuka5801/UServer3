@@ -4,8 +4,8 @@ using System.Linq;
 using System.Reflection;
 using RakNet.Network;
 using SapphireEngine;
-using UServer3.Data;
 using UServer3.Rust;
+using UServer3.Rust.Data;
 
 namespace UServer3.CSharp.Reflection
 {

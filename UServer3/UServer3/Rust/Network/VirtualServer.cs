@@ -7,9 +7,11 @@ using RakNet.Network;
 using UServer3.Environments;
 using UServer3.Environments.Cryptography;
 using UServer3.Rust;
-using UServer3.Struct;
+using UServer3.Rust.Rust;
+using UServer3.Rust.Struct;
+using UServer3.Rust.Struct;
 
-namespace UServer3.Network
+namespace UServer3.Rust.Network
 {
     public class VirtualServer : SapphireType
     {

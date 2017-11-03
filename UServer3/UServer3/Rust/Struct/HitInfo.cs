@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace UServer3.Struct
+namespace UServer3.Rust.Struct
 {
     public struct HitInfo
     {

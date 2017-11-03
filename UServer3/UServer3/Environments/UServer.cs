@@ -1,9 +1,10 @@
 ﻿using System;
 using SapphireEngine;
 using UServer3.CSharp.Reflection;
-using UServer3.Data;
-using UServer3.Functions;
-using UServer3.Network;
+using UServer3.Rust.Data;
+using UServer3.Rust.Functions;
+using UServer3.Rust.Network;
+using UServer3.Rust.Functions;
 
 namespace UServer3.Environments
 {

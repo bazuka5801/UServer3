@@ -4,7 +4,7 @@ using SapphireEngine;
 using UnityEngine;
 using UServer3.Rust;
 
-namespace UServer3.Network
+namespace UServer3.Rust.Network
 {
     public class DDraw
     {

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace UServer3.Data
+namespace UServer3.Rust.Data
 {
     public class Database
     {

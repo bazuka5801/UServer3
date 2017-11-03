@@ -4,8 +4,8 @@ using ProtoBuf;
 using RakNet.Network;
 using UnityEngine;
 using UServer3.CSharp.Reflection;
-using UServer3.Data;
-using UServer3.Network;
+using UServer3.Rust.Network;
+using UServer3.Rust.Data;
 
 namespace UServer3.Rust
 {

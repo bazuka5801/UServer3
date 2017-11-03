@@ -2,11 +2,11 @@
 using RakNet.Network;
 using SapphireEngine;
 using UServer3.CSharp.Reflection;
-using UServer3.Data;
 using UServer3.Rust;
-using UServer3.Struct;
+using UServer3.Rust.Data;
+using UServer3.Rust.Struct;
 
-namespace UServer3.Network
+namespace UServer3.Rust.Network
 {
     public class NetworkManager : SapphireType
     {
