@@ -62,6 +62,14 @@ namespace UServer3.Rust
             }
         }
 
+        public override bool OnEntity(Entity entity)
+        {
+            if (IsServerAdmin) return false;
+            SetPlayerFlag(E_PlayerFlags.IsAdmin, true);
+            entity.basePlayer.playerFlags = (Int32)PlayerFlags;
+            return true;
+        }
+
         public override void OnEntityUpdate(Entity entity)
         {
             base.OnEntityUpdate(entity);
@@ -123,6 +131,7 @@ namespace UServer3.Rust
 //                    return true;
 //                }
 //                spend = 0;
+                
                 if (IsServerAdmin) return false;
                 if (playerTick.modelState.flying)
                 {
@@ -135,6 +144,7 @@ namespace UServer3.Rust
                     if (lastFlying) previousTick.modelState.flying = true;
                     lastFlying = false;
                 }
+                
 
                 if (VirtualServer.BaseClient.write.Start())
                 {

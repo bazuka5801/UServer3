@@ -239,15 +239,20 @@ namespace UServer3.Rust.Network
                     packet.read.UInt32();
                     using (Entity entity = Entity.Deserialize(packet.read))
                     {
-                        if (EntityManager.OnEntity(entity) == false)
+                        var num = TakeEntityNUM;
+                        if (EntityManager.OnEntity(entity) != false)
                         {
                             if (BaseServer.write.Start())
                             {
                                 BaseServer.write.PacketID(Message.Type.Entities);
-                                BaseServer.write.UInt32(TakeEntityNUM);
+                                BaseServer.write.UInt32(num);
                                 entity.WriteToStream(BaseServer.write);
                                 BaseServer.write.Send(new SendInfo(BaseServer.connections[0]));
                             }
+                        }
+                        else
+                        {
+                            SendPacket(BaseServer, packet);
                         }
                     }
                     break;
