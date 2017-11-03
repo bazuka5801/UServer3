@@ -11,12 +11,12 @@ namespace UServer3.Rust
         public static bool OnEntity(Entity entity)
         {
             var ent = BaseNetworkable.Get(entity.baseNetworkable.uid);
-            var prefabId = entity.baseNetworkable.prefabID;
             if (ent != null)
             {
                 ent.OnEntityUpdate(entity);
                 return ent.OnEntity(entity);
             }
+            var prefabId = entity.baseNetworkable.prefabID;
             
             if (prefabId == (UInt32) EPrefabUID.BasePlayer)
             {
@@ -40,11 +40,11 @@ namespace UServer3.Rust
             }
             else if (Database.IsBaseResource(prefabId))
             {
-                new BaseResource();
+                ent = new BaseResource();
             }
             else if (entity.worldItem != null && Database.IsComponent(entity.worldItem.item.itemid))
             {
-                new WorldItem();
+                //new WorldItem();
             }
             
             if (ent == null) return false;

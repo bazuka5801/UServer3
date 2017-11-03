@@ -11,8 +11,6 @@ namespace UServer3.Network
     public class NetworkManager : SapphireType
     {
         public static NetworkManager Instance;
-
-        public UserInformation ConnectionInfromation;
         
         public override void OnAwake() => Instance = this;
 
@@ -47,6 +45,8 @@ namespace UServer3.Network
         {
             UInt32 UID = message.read.EntityID();
             UInt32 rpcId = message.read.UInt32();
+            if (type == ERPCNetworkType.IN)
+                message.read.UInt64();
             //TODO: Optimize Enum.IsDefined
             if (!Enum.IsDefined(typeof(ERPCMethodUID), rpcId)) return false;
             return RPCManager.RunRPCMethod(UID, (ERPCMethodUID) rpcId, type, message);

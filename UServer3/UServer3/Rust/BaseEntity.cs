@@ -22,7 +22,7 @@ namespace UServer3.Rust
             }
         }
 
-        public void OnPositionUpdate(Vector3 position, Vector3 rotation)
+        public virtual void OnPositionUpdate(Vector3 position, Vector3 rotation)
         {
             Position = position;
             Rotation = rotation;

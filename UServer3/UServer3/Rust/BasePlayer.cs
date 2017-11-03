@@ -68,8 +68,8 @@ namespace UServer3.Rust
             {
                 SteamID = entity.basePlayer.userid;
                 Username = entity.basePlayer.name;
-                ModelState = entity.basePlayer.modelState.Copy();
-                PlayerFlags = (E_PlayerFlags) entity.basePlayer.playerFlags;
+                if (entity.basePlayer.modelState != null)
+                    ModelState = entity.basePlayer.modelState.Copy();
                 if (HasPlayerFlag(E_PlayerFlags.IsAdmin))
                     IsServerAdmin = true;
                 if (entity.basePlayer.heldEntity == 0)
