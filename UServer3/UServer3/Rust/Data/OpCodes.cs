@@ -121,6 +121,19 @@ namespace UServer3.Rust.Data
         #endregion
 
         #region [Hits]
+
+        #region [Method] GetTargetHit
+        public static EHumanBone GetTargetHit(EHumanBone currentBone, bool autoHeadshot)
+        {
+            if (autoHeadshot) 
+                return EHumanBone.Head;
+            if (currentBone == EHumanBone.Head) return EHumanBone.Head;
+            // Head or Body
+            if (currentBone == EHumanBone.Body) return OpCodes.GetRandomHumanBone(1);
+            // Head or Body or Legs
+            return OpCodes.GetRandomHumanBone(2);
+        }
+        #endregion
         
         #region [List] ListHumanBones
         private static List<EHumanBone> ListHumanBones = new List<EHumanBone>()

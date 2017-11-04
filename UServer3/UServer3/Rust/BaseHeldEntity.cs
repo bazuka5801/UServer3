@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using ProtoBuf;
 using RakNet.Network;
+using SapphireEngine;
 using UnityEngine;
 using UServer3.CSharp.Reflection;
 using UServer3.Rust.Network;
 using UServer3.Rust.Data;
+using UServer3.Rust.Functions;
 
 namespace UServer3.Rust
 {
@@ -36,6 +38,25 @@ namespace UServer3.Rust
         [RPCMethod(ERPCMethodUID.PlayerAttack)]
         private bool RPC_OnPlayerAttack(ERPCNetworkType type, Message message)
         {
+            if (MeleeAim.HasCooldown()) return true;
+            using (PlayerAttack playerAttack = PlayerAttack.Deserialize(message.read))
+            {
+                var attack = playerAttack.attack;
+                if (attack.hitID == 0) return true;
+                
+                #region [BasePlayer]
+                if (Settings.Aimbot_Melee_Manual)
+                {
+                    var player = Get<BasePlayer>(playerAttack.attack.hitID);
+                    if (player != null)
+                    {
+                        var typeHit = OpCodes.GetTargetHit((EHumanBone) attack.hitBone, Settings.Aimbot_Melee_Manual_AutoHeadshot);
+                        MeleeAim.SetCooldown((EPrefabUID) this.PrefabID);
+                        return SendMeleeAttack(player, typeHit);
+                    }
+                }
+                #endregion
+            }
             return false;
         }
         #endregion
@@ -43,6 +64,7 @@ namespace UServer3.Rust
         #region [Method] SendMeleeAttack
         public bool SendMeleeAttack(BaseEntity target, EHumanBone bone)
         {
+            ConsoleSystem.Log(bone.ToString());
             var attackInfo = OpCodes.GetTargetHitInfo(bone);
             PlayerAttack attack = new PlayerAttack()
             {

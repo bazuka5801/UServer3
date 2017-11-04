@@ -34,7 +34,10 @@ namespace UServer3
         public static bool Aimbot_Range_Silent = true;
         
         // При Aimbot_Range_Silent, чит попадаёт только в голову противника
-        public static bool Aimbot_Range_AutoHeadshot = true;
+        public static bool Aimbot_Range_Silent_AutoHeadshot = true;
+        
+        // При самостоятельном попадании по противнику, чит попадаёт только в голову
+        public static bool Aimbot_Range_Manual_AutoHeadshot = true;
         
         #endregion
 
@@ -43,12 +46,17 @@ namespace UServer3
         // Если вы держите в руках оружие ближнего боя и враг в радиусе действия оружия, то чит автоматически изуродует врага (даже ручки пачкать не нужно)
         public static bool Aimbot_Melee_Silent = true;
         
-        // TODO: Ещё не работает
         // При Aimbot_Melee_Silent, чит бьёт врага только в голову противника
-        public static bool Aimbot_Melee_AutoHeadshot = false;
+        public static bool Aimbot_Melee_Silent_AutoHeadshot = false;
         
         // При Aimbot_Melee_Silent, чит бьёт в два раза быстрее
-        public static bool Aimbot_Melee_Fast = false;
+        public static bool Aimbot_Melee_Silent_Fast = false;
+        
+        // При самостоятельном ударе по противнику, чит выбирает часть тела для удара
+        public static bool Aimbot_Melee_Manual = false;
+        
+        // При самостоятельном ударе по противнику, чит бьёт его только по голове
+        public static bool Aimbot_Melee_Manual_AutoHeadshot = false;
         
         #endregion
 

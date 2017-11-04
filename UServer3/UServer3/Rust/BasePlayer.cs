@@ -117,7 +117,7 @@ namespace UServer3.Rust
         private PlayerTick previousRecievedTick = new PlayerTick();
         private bool lastFlying = false;
 
-        private int spend = 0;
+//        private int spend = 0;
         public bool OnTick(Message packet)
         {
             using (PlayerTick playerTick = PlayerTick.Deserialize(packet.read, previousRecievedTick, true))
@@ -188,16 +188,6 @@ namespace UServer3.Rust
         [RPCMethod(ERPCMethodUID.OnProjectileAttack)]
         private bool RPC_OnProjectileAttack(ERPCNetworkType type, Message message)
         {
-            EHumanBone GetTargetHit(EHumanBone currentBone)
-            {
-                if (Settings.Aimbot_Range_AutoHeadshot) 
-                    return EHumanBone.Head;
-                if (currentBone == EHumanBone.Head) return EHumanBone.Head;
-                // Head or Body
-                if (currentBone == EHumanBone.Body) return OpCodes.GetRandomHumanBone(1);
-                // Head or Body or Legs
-                return OpCodes.GetRandomHumanBone(2);
-            }
             using (PlayerProjectileAttack attack = PlayerProjectileAttack.Deserialize(message.read))
             {
                 UInt32 hitId = attack.playerAttack.attack.hitID;
@@ -209,8 +199,7 @@ namespace UServer3.Rust
                 {
                     if (RangeAim.Instance.TargetPlayer != null)
                     {
-                        EHumanBone typeHit = GetTargetHit(0);
-                        ConsoleSystem.Log(typeHit.ToString());
+                        EHumanBone typeHit = OpCodes.GetTargetHit(0, Settings.Aimbot_Range_Manual_AutoHeadshot);
                         return this.SendRangeAttack(RangeAim.Instance.TargetPlayer, typeHit,
                             attack);
                     }
@@ -220,7 +209,7 @@ namespace UServer3.Rust
                     RangeAim.Instance.TargetPlayer =
                         (BasePlayer) ListNetworkables[hitId];
 
-                    EHumanBone typeHit = GetTargetHit((EHumanBone)hitBone);
+                    EHumanBone typeHit = OpCodes.GetTargetHit((EHumanBone)hitBone, Settings.Aimbot_Range_Silent_AutoHeadshot);
                     ConsoleSystem.Log(typeHit.ToString());
                     return this.SendRangeAttack(RangeAim.Instance.TargetPlayer, typeHit,
                         attack);
