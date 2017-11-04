@@ -16,12 +16,18 @@ namespace UServer3.Rust
         public UInt32 ItemID;
         public UInt32 Parent;
         public UInt32 Bone;
+
+        public Int32 AmmoType = 0;
         
         public bool IsMelee() => OpCodes.IsMeleeWeapon_Prefab((EPrefabUID)PrefabID);
         
         public override void OnEntityUpdate(Entity entity)
         {
             base.OnEntityUpdate(entity);
+            if (entity.baseProjectile?.primaryMagazine != null)
+            {
+                AmmoType = entity.baseProjectile.primaryMagazine.ammoType;
+            }
             if (entity.heldEntity != null)
             {
                 ItemID = entity.heldEntity.itemUID;

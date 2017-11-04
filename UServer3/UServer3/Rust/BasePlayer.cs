@@ -40,7 +40,8 @@ namespace UServer3.Rust
         
         public Vector3 ViewAngles = Vector3.zero;
         public Vector3 EyePos = Vector3.zero;
-        
+
+        public ItemContainer Belt;
 
         public override void OnEntityCreate(Entity entity)
         {
@@ -98,7 +99,7 @@ namespace UServer3.Rust
             this.ActiveItem = (BaseHeldEntity)ListNetworkables[activeItem + 1];
             if (this.IsLocalPlayer && this.HasActiveItem)
             {
-                ConsoleSystem.Log("You use: " + this.ActiveItem.PrefabID);
+                ConsoleSystem.Log("You use: " + this.ActiveItem.PrefabID + " Ammotype =>" + this.ActiveItem.AmmoType);
             }
         }
 
@@ -159,7 +160,7 @@ namespace UServer3.Rust
         }
         #endregion
 
-        
+        #region [RPCMethod] FinishLoading
         [RPCMethod(ERPCMethodUID.FinishLoading)]
         private bool RPC_FinishLoading(ERPCNetworkType type, Message message)
         {
@@ -167,6 +168,7 @@ namespace UServer3.Rust
             EACServer.OnFinishLoading(VirtualServer.BaseServer.connections[0]);
             return false;
         }
+        #endregion
         
         #region [RPCMethod] StartLoading
         [RPCMethod(ERPCMethodUID.StartLoading)]
@@ -200,8 +202,7 @@ namespace UServer3.Rust
                     if (RangeAim.Instance.TargetPlayer != null)
                     {
                         EHumanBone typeHit = OpCodes.GetTargetHit(0, Settings.Aimbot_Range_Manual_AutoHeadshot);
-                        return this.SendRangeAttack(RangeAim.Instance.TargetPlayer, typeHit,
-                            attack);
+                        return RangeAim.SendRangeAttack(RangeAim.Instance.TargetPlayer, typeHit, attack);
                     }
                 }
                 if (hitPlayer && hitPlayer.IsAlive)
@@ -211,8 +212,7 @@ namespace UServer3.Rust
 
                     EHumanBone typeHit = OpCodes.GetTargetHit((EHumanBone)hitBone, Settings.Aimbot_Range_Silent_AutoHeadshot);
                     ConsoleSystem.Log(typeHit.ToString());
-                    return this.SendRangeAttack(RangeAim.Instance.TargetPlayer, typeHit,
-                        attack);
+                    return RangeAim.SendRangeAttack(RangeAim.Instance.TargetPlayer, typeHit, attack);
                 }
             }
             return false;
@@ -241,82 +241,6 @@ namespace UServer3.Rust
         }
         #endregion
 
-        #region [Method] SendRangeAttack
-        public bool SendRangeAttack(BasePlayer target, EHumanBone typeHit,
-            PlayerProjectileAttack parentAttack)
-        {
-            int sleep_mlisecond = 1;
-            #region [Section] Attack Deploy
-
-            float player_hit_distance = Vector3.Distance(EyePos, parentAttack.playerAttack.attack.hitPositionWorld);
-            
-            float distance_point = Vector3.Distance(target.Position + new Vector3(0,50,0), parentAttack.playerAttack.attack.hitPositionWorld) - player_hit_distance;
-            if (distance_point > 3 && distance_point > 0)
-            {
-                float deploy = 13;
-
-                if (this.ActiveItem != null)
-                {
-                    if (OpCodes.IsRangeDeploy((EPrefabUID) this.ActiveItem.PrefabID))
-                    {
-                        //ConsoleSystem.Log("This is range weapone");
-                        deploy = OpCodes.GetRangeDeploy((EPrefabUID) this.ActiveItem.PrefabID);
-                    }
-                    else if (OpCodes.IsMeleeWeapon_Prefab((EPrefabUID) this.ActiveItem.PrefabID) == false)
-                    {
-                        //ConsoleSystem.Log("This is fire weapone");
-                        if (distance_point > 50)
-                            deploy = 0.4f;
-                        else
-                            deploy = 0;
-                    }
-                    else
-                    {
-                        //ConsoleSystem.Log("This is mele weapone");
-                    }
-                }
-                sleep_mlisecond = (int) (distance_point * deploy);
-            }
-            #endregion
-            ConsoleSystem.LogWarning("[SendRangeAttack] Sleep => "+sleep_mlisecond*0.001f);
-            parentAttack = parentAttack.Copy();
-            SapphireEngine.Functions.Timer.SetTimeout(() =>
-            {
-                if (target.IsAlive)
-                {
-                    parentAttack.hitDistance = Vector3.Distance(target.Position, BasePlayer.LocalPlayer.Position);
-                    var hitInfo = OpCodes.GetTargetHitInfo(typeHit);
-                    parentAttack.playerAttack.attack.hitBone = hitInfo.HitBone;
-                    parentAttack.playerAttack.attack.hitPartID = hitInfo.HitPartID;
-                    parentAttack.playerAttack.attack.hitNormalLocal = hitInfo.HitNormalPos;
-                    parentAttack.playerAttack.attack.hitPositionLocal = hitInfo.HitLocalPos;
-                    parentAttack.playerAttack.attack.hitID = target.UID;
-
-                    float height = target.GetHeight();
-
-                    var pos = target.Position + new Vector3(0, 50, 0);
-                    //DDraw.Arrow(target.Position + new Vector3(0, height, 0), pos, 0.1f, Color.blue, 15f);
-                    parentAttack.playerAttack.attack.hitPositionWorld = pos;
-                    parentAttack.playerAttack.attack.hitNormalWorld = pos;
-                    parentAttack.playerAttack.attack.pointEnd = pos;
-
-//                var forward = GetForward();
-//                parentAttack.playerAttack.attack.hitPositionWorld = EyePos + GetForward();
-//                parentAttack.playerAttack.attack.hitNormalWorld = EyePos + GetForward();
-//                parentAttack.playerAttack.attack.pointEnd = EyePos + GetForward();
-
-                    VirtualServer.BaseClient.write.Start();
-                    VirtualServer.BaseClient.write.PacketID(Message.Type.RPCMessage);
-                    VirtualServer.BaseClient.write.UInt32(this.UID);
-                    VirtualServer.BaseClient.write.UInt32((uint) ERPCMethodUID.OnProjectileAttack);
-                    PlayerProjectileAttack.Serialize(VirtualServer.BaseClient.write, parentAttack);
-                    VirtualServer.BaseClient.write.Send(new SendInfo(VirtualServer.BaseClient.Connection));
-                }
-            }, sleep_mlisecond * 0.001f);
-            return true;
-        }
-
-        #endregion
 
         #region [Method] FindEnemy
         public static BasePlayer FindEnemy(float radius)

@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using ProtoBuf;
+using RakNet.Network;
 using SapphireEngine;
 using UnityEngine;
 using UServer3.Rust.Network;
@@ -19,7 +21,8 @@ namespace UServer3.Rust.Functions
         private float m_interval_update_tick = 0f;
         private float m_no_target_time = 0;
         private Stack<TargetAimInformation> m_list_players = new Stack<TargetAimInformation>();
-
+        private static BasePlayer LocalPlayer => BasePlayer.LocalPlayer;
+        
         public override void OnAwake()
         {
             Instance = this;
@@ -94,5 +97,52 @@ namespace UServer3.Rust.Functions
                 ///
             }
         }
+        
+        
+        #region [Method] SendRangeAttack
+        public static bool SendRangeAttack(BasePlayer target, EHumanBone typeHit,
+            PlayerProjectileAttack parentAttack)
+        {
+            int sleep_mlisecond = 1;
+            
+            ConsoleSystem.LogWarning("[SendRangeAttack] Sleep => "+sleep_mlisecond*0.001f);
+            parentAttack = parentAttack.Copy();
+            SapphireEngine.Functions.Timer.SetTimeout(() =>
+            {
+                if (target.IsAlive)
+                {
+                    parentAttack.hitDistance = Vector3.Distance(target.Position, BasePlayer.LocalPlayer.Position);
+                    var hitInfo = OpCodes.GetTargetHitInfo(typeHit);
+                    parentAttack.playerAttack.attack.hitBone = hitInfo.HitBone;
+                    parentAttack.playerAttack.attack.hitPartID = hitInfo.HitPartID;
+                    parentAttack.playerAttack.attack.hitNormalLocal = hitInfo.HitNormalPos;
+                    parentAttack.playerAttack.attack.hitPositionLocal = hitInfo.HitLocalPos;
+                    parentAttack.playerAttack.attack.hitID = target.UID;
+
+                    float height = target.GetHeight();
+
+                    var pos = target.Position + new Vector3(0, 50, 0);
+                    //DDraw.Arrow(target.Position + new Vector3(0, height, 0), pos, 0.1f, Color.blue, 15f);
+                    parentAttack.playerAttack.attack.hitPositionWorld = pos;
+                    parentAttack.playerAttack.attack.hitNormalWorld = pos;
+                    parentAttack.playerAttack.attack.pointEnd = pos;
+
+//                var forward = GetForward();
+//                parentAttack.playerAttack.attack.hitPositionWorld = EyePos + GetForward();
+//                parentAttack.playerAttack.attack.hitNormalWorld = EyePos + GetForward();
+//                parentAttack.playerAttack.attack.pointEnd = EyePos + GetForward();
+
+                    VirtualServer.BaseClient.write.Start();
+                    VirtualServer.BaseClient.write.PacketID(Message.Type.RPCMessage);
+                    VirtualServer.BaseClient.write.UInt32(LocalPlayer.UID);
+                    VirtualServer.BaseClient.write.UInt32((uint) ERPCMethodUID.OnProjectileAttack);
+                    PlayerProjectileAttack.Serialize(VirtualServer.BaseClient.write, parentAttack);
+                    VirtualServer.BaseClient.write.Send(new SendInfo(VirtualServer.BaseClient.Connection));
+                }
+            }, sleep_mlisecond * 0.001f);
+            return true;
+        }
+
+        #endregion
     }
 }
