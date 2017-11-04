@@ -16,6 +16,7 @@ namespace UServer3.Rust
 
         public override Vector3 GetHitPosition()
         {
+            if (OreBonus == null) FindBonus();
             if (OreBonus != null) return OreBonus.Position;
             
             ConsoleSystem.LogError($"[OreResource] GetHitPosition => OreBonus is null");

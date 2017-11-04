@@ -28,7 +28,7 @@ namespace UServer3
 
         #endregion
 
-        #region [Settings] Aimbot_Range
+        #region [Settings] Aimbot Range
         
         // При попадании в статический объект, чит ищет оптимальную цель, засщитывает то попадание по ней
         public static bool Aimbot_Range_Silent = true;
@@ -41,9 +41,9 @@ namespace UServer3
         
         #endregion
 
-        #region [Settings] Aimbot_Melee
+        #region [Settings] Aimbot Melee
         
-        // Если вы держите в руках оружие ближнего боя и враг в радиусе действия оружия, то чит автоматически изуродует врага (даже ручки пачкать не нужно)
+        // Если вы держите в руках оружие ближнего боя и враг в радиусе действия, то чит автоматически изуродует врага (даже ручки пачкать не нужно)
         public static bool Aimbot_Melee_Silent = true;
         
         // При Aimbot_Melee_Silent, чит бьёт врага только в голову противника
@@ -57,6 +57,22 @@ namespace UServer3
         
         // При самостоятельном ударе по противнику, чит бьёт его только по голове
         public static bool Aimbot_Melee_Manual_AutoHeadshot = false;
+        
+        #endregion
+
+        #region [Settings] Auto Gather
+        
+        // Если вы держите в руках инструмент для добычи и ресурс в радиусе действия, то чит автоматически добывает ресурсы
+        public static bool AutoGather = true;
+        
+        // При AutoGather, вы добываете ресурсы в 2 раза быстрее
+        public static bool AutoGather_Fast = true;
+        
+        // При AutoGather, вам не нужно будет искать бонус на руде, чит найдёт его сам и будет ударять по нему
+        public static bool AutoGather_Bonus = true;
+        
+        // При ручной добыче ресурсов, вам не нужно будет искать бонус на руде, чит найдёт его сам и ударят по нему
+        public static bool ManualGather_Bonus = true;
         
         #endregion
 

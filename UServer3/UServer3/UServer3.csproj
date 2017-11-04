@@ -91,6 +91,7 @@
     <Compile Include="Rust\Data\ERPCNetworkType.cs" />
     <Compile Include="Rust\Data\E_PlayerFlags.cs" />
     <Compile Include="Rust\Data\OpCodes.cs" />
+    <Compile Include="Rust\Functions\AutoGather.cs" />
     <Compile Include="Rust\Functions\MeleeAim.cs" />
     <Compile Include="Rust\Functions\RangeAim.cs" />
     <Compile Include="Rust\Network\DDraw.cs" />

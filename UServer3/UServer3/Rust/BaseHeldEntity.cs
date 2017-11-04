@@ -38,11 +38,39 @@ namespace UServer3.Rust
         [RPCMethod(ERPCMethodUID.PlayerAttack)]
         private bool RPC_OnPlayerAttack(ERPCNetworkType type, Message message)
         {
-            if (MeleeAim.HasCooldown()) return true;
+            if (MeleeAim.HasCooldown() || AutoGather.HasCooldown()) return true;
             using (PlayerAttack playerAttack = PlayerAttack.Deserialize(message.read))
             {
                 var attack = playerAttack.attack;
                 if (attack.hitID == 0) return true;
+                
+                #region [BaseResource]
+                var resource = Get<BaseResource>(attack.hitID);
+                if (resource != null)
+                {
+                    attack.hitItem = 0;
+                    attack.hitBone = 0;
+                    attack.hitPartID = 0;
+                    var pos = Settings.ManualGather_Bonus ? resource.GetHitPosition() : resource.Position;
+                    
+                    // Если это OreResource
+                    if (pos != resource.Position)
+                    {
+                        attack.hitPositionWorld = pos;
+                        attack.hitNormalWorld = pos;
+                    }
+                    AutoGather.SetCooldown((EPrefabUID)PrefabID);
+                    if (VirtualServer.BaseClient.write.Start())
+                    {
+                        VirtualServer.BaseClient.write.PacketID(Message.Type.RPCMessage);
+                        VirtualServer.BaseClient.write.EntityID(this.UID);
+                        VirtualServer.BaseClient.write.UInt32((UInt32)ERPCMethodUID.PlayerAttack);
+                        PlayerAttack.Serialize(VirtualServer.BaseClient.write, playerAttack);
+                        VirtualServer.BaseClient.Send();
+                        return true;
+                    }
+                }
+                #endregion
                 
                 #region [BasePlayer]
                 if (Settings.Aimbot_Melee_Manual)
@@ -99,9 +127,10 @@ namespace UServer3.Rust
         #endregion
 
         #region [Method] SendMeleeResourceAttack
-        public void SendMeleeResourceAttack(BaseResource baseResource)
+        public void SendMeleeResourceAttack(BaseResource baseResource, bool bonus)
         {
-            Vector3 position = baseResource.GetHitPosition();
+            // Если бонус нам не нужен, то по нему не ударяем
+            Vector3 position = bonus ? baseResource.GetHitPosition() : baseResource.Position;
             PlayerAttack attack = new PlayerAttack()
             {
                 projectileID = 0,
