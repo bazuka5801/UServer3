@@ -47,8 +47,6 @@ namespace UServer3.Rust.Network
             UInt32 rpcId = message.read.UInt32();
             if (type == ERPCNetworkType.IN)
                 message.read.UInt64();
-            //TODO: Optimize Enum.IsDefined
-            if (!Enum.IsDefined(typeof(ERPCMethodUID), rpcId)) return false;
             return RPCManager.RunRPCMethod(UID, (ERPCMethodUID) rpcId, type, message);
         }
 
