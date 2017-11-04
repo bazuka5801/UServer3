@@ -56,6 +56,8 @@ namespace UServer3.Rust.Functions
                                     distance_check = distance / 2;
                                 else  if (distance > 30)
                                     distance_check = 9;
+                                
+                                distance_check = 100;
                                 float distance_point_and_playuer = Vector3.Distance(forward, BasePlayer.ListPlayers[i].Position + new Vector3(0,BasePlayer.ListPlayers[i].GetHeight()*0.5f,0));
                                 if (distance_point_and_playuer < distance_check)
                                     m_list_players.Push(new TargetAimInformation { Player = BasePlayer.ListPlayers[i], DistanceCursor =  distance_point_and_playuer});

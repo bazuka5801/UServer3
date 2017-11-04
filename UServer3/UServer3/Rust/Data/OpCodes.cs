@@ -45,7 +45,7 @@ namespace UServer3.Rust.Data
         #region [Dictionary] ListRangeDeploy
         private static Dictionary<EPrefabUID, float> ListRangeDeploy = new Dictionary<EPrefabUID, float>()
         {
-            { EPrefabUID.Bow, 5 },
+            { EPrefabUID.Bow, 5.5f },
             { EPrefabUID.CrossBow, 4f },
             { EPrefabUID.NailGun, 4f },
         };
