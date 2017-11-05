@@ -195,20 +195,29 @@ namespace UServer3.Rust
                 UInt32 hitId = attack.playerAttack.attack.hitID;
                 UInt32 hitBone = attack.playerAttack.attack.hitBone;
                 var hitPlayer = Get<BasePlayer>(hitId);
-                if (Settings.Aimbot_Range_Silent && (hitId == 0 ||
-                    HasNetworkable(hitId) == false ||
-                    hitPlayer == null))
+                if (Settings.Aimbot_Range_Silent)
                 {
-                    return RangeAim.Silent(attack);
+                    if (hitId == 0)
+                    {
+                        return RangeAim.Silent(attack);
+                    }
+                    if (hitPlayer == null && hitId != 0 && RangeAim.Instance.TargetPlayer != null)
+                    {
+                        var hitPost = attack.playerAttack.attack.hitPositionWorld;
+                        if (Vector3.Distance(Position, RangeAim.Instance.TargetPlayer.Position) < 2.5f ||
+                            Vector3.Distance(Position, hitPost) > 2.5f)
+                        {
+                            ConsoleSystem.Log("near wall not found");
+                            return RangeAim.Silent(attack);
+                        }
+                        ConsoleSystem.Log("Ignore because near wall");
+                        return false;
+                    }
                 }
                 if (hitPlayer && hitPlayer.IsAlive)
                 {
-                    RangeAim.Instance.TargetPlayer =
-                        (BasePlayer) ListNetworkables[hitId];
-
-                    EHumanBone typeHit = OpCodes.GetTargetHit((EHumanBone)hitBone, Settings.Aimbot_Range_Silent_AutoHeadshot);
-                    ConsoleSystem.Log(typeHit.ToString());
-                   // return RangeAim.SendRangeAttack(RangeAim.Instance.TargetPlayer, typeHit, attack);
+                    RangeAim.Instance.TargetPlayer = Get<BasePlayer>(hitId);
+                    return RangeAim.Manual(attack);
                 }
             }
             return false;

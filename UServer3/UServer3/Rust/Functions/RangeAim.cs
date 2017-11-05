@@ -149,7 +149,16 @@ namespace UServer3.Rust.Functions
             }
             return false;
         }
-        
+        public static bool Manual(PlayerProjectileAttack attack)
+        {
+            if (Instance.TargetPlayer != null)
+            {            
+                EHumanBone typeHit = OpCodes.GetTargetHit((EHumanBone)attack.playerAttack.attack.hitBone, Settings.Aimbot_Range_Manual_AutoHeadshot);
+                SendRangeAttack(Instance.TargetPlayer, typeHit, attack, Instance.TargetPlayer.Position);
+                return true;
+            }
+            return false;
+        }
         
         #region [Method] SendRangeAttack
 

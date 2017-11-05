@@ -1,6 +1,8 @@
 ﻿using System;
 using SapphireEngine;
+using UnityEngine;
 using UServer3.Rust.Data;
+using UServer3.Rust.Network;
 
 namespace UServer3.Rust.Functions
 {
@@ -51,7 +53,14 @@ namespace UServer3.Rust.Functions
                     {
                         // При успешной атаке, ставим кд равное максимальной скорости атаки данного оружия
                         SetCooldown(speed);
-                        BasePlayer.LocalPlayer.ActiveItem.SendMeleeAttack(target, OpCodes.GetTargetHit(0, Settings.Aimbot_Melee_Silent_AutoHeadshot));
+
+                        var bone = OpCodes.GetTargetHit(0, Settings.Aimbot_Melee_Silent_AutoHeadshot);
+                        var attackInfo = OpCodes.GetTargetHitInfo(bone);
+                        DDraw.Arrow(target.Position + new Vector3(0, target.GetHeight() * 0.5f, 0),
+                            target.Position + new Vector3(0, target.GetHeight() * 0.5f, 0) -
+                            BasePlayer.LocalPlayer.GetForward(), 0.1f, Color.blue, 1f);
+                        var position = target.Position+new Vector3(0,target.GetHeight()*0.5f,0) - BasePlayer.LocalPlayer.GetForward();
+                        BasePlayer.LocalPlayer.ActiveItem.SendMeleeAttack(target, bone, position);
                     }
                 }
             }

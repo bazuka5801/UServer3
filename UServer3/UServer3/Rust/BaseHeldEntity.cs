@@ -104,7 +104,7 @@ namespace UServer3.Rust
                     {
                         var typeHit = OpCodes.GetTargetHit((EHumanBone) attack.hitBone, Settings.Aimbot_Melee_Manual_AutoHeadshot);
                         MeleeAim.SetCooldown((EPrefabUID) this.PrefabID);
-                        return SendMeleeAttack(player, typeHit);
+                        return SendMeleeAttack(player, typeHit, player.Position);
                     }
                 }
                 #endregion
@@ -114,7 +114,7 @@ namespace UServer3.Rust
         #endregion
         
         #region [Method] SendMeleeAttack
-        public bool SendMeleeAttack(BaseEntity target, EHumanBone bone)
+        public bool SendMeleeAttack(BaseEntity target, EHumanBone bone, Vector3 position)
         {
             ConsoleSystem.Log(bone.ToString());
             var attackInfo = OpCodes.GetTargetHitInfo(bone);
@@ -128,12 +128,12 @@ namespace UServer3.Rust
                     hitBone = attackInfo.HitBone,
                     hitMaterialID = 97517300,
                     hitPartID = attackInfo.HitPartID,
-                    pointEnd = target.Position,
-                    pointStart = target.Position,
+                    pointEnd = position,
+                    pointStart = position,
                     hitPositionLocal = attackInfo.HitLocalPos,
-                    hitPositionWorld = target.Position,
+                    hitPositionWorld = position,
                     hitNormalLocal = attackInfo.HitNormalPos,
-                    hitNormalWorld = target.Position
+                    hitNormalWorld = position
                 }
             };
 
