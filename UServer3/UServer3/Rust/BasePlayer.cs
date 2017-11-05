@@ -199,11 +199,7 @@ namespace UServer3.Rust
                     HasNetworkable(hitId) == false ||
                     hitPlayer == null))
                 {
-                    if (RangeAim.Instance.TargetPlayer != null)
-                    {
-                        EHumanBone typeHit = OpCodes.GetTargetHit(0, Settings.Aimbot_Range_Manual_AutoHeadshot);
-                        return RangeAim.SendRangeAttack(RangeAim.Instance.TargetPlayer, typeHit, attack);
-                    }
+                    return RangeAim.Silent(attack);
                 }
                 if (hitPlayer && hitPlayer.IsAlive)
                 {
@@ -212,7 +208,7 @@ namespace UServer3.Rust
 
                     EHumanBone typeHit = OpCodes.GetTargetHit((EHumanBone)hitBone, Settings.Aimbot_Range_Silent_AutoHeadshot);
                     ConsoleSystem.Log(typeHit.ToString());
-                    return RangeAim.SendRangeAttack(RangeAim.Instance.TargetPlayer, typeHit, attack);
+                   // return RangeAim.SendRangeAttack(RangeAim.Instance.TargetPlayer, typeHit, attack);
                 }
             }
             return false;

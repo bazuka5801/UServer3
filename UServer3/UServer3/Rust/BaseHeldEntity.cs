@@ -18,15 +18,19 @@ namespace UServer3.Rust
         public UInt32 Bone;
 
         public Int32 AmmoType = 0;
-        
+        public bool IsProjectile = false;
         public bool IsMelee() => OpCodes.IsMeleeWeapon_Prefab((EPrefabUID)PrefabID);
         
         public override void OnEntityUpdate(Entity entity)
         {
             base.OnEntityUpdate(entity);
-            if (entity.baseProjectile?.primaryMagazine != null)
+            if (entity.baseProjectile != null)
             {
-                AmmoType = entity.baseProjectile.primaryMagazine.ammoType;
+                IsProjectile = true;
+                if (entity.baseProjectile.primaryMagazine != null)
+                {
+                    AmmoType = entity.baseProjectile.primaryMagazine.ammoType;
+                }
             }
             if (entity.heldEntity != null)
             {
@@ -39,6 +43,20 @@ namespace UServer3.Rust
             }
         }
 
+        #region [RPCMethod] CLProject
+        [RPCMethod(ERPCMethodUID.CLProject)]
+        private bool RPC_OnCLProject(ERPCNetworkType type, Message message)
+        {
+            using (ProjectileShoot projectileShoot = ProjectileShoot.Deserialize(message.read))
+            {
+                foreach (ProjectileShoot.Projectile projectile in projectileShoot.projectiles)
+                {
+                    RangeAim.NoteFiredProjectile(projectile.projectileID, PrefabID, AmmoType);
+                }
+            }
+            return false;
+        }
+        #endregion
 
         #region [RPCMethod] PlayerAttack
         [RPCMethod(ERPCMethodUID.PlayerAttack)]

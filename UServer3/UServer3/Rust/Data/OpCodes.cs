@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UServer3.CSharp.ExtensionMethods;
 using UServer3.Environments;
@@ -18,6 +19,10 @@ namespace UServer3.Rust.Data
         public static float GetMeleeMaxDistance(EPrefabUID uid) => ListMeleeMaxDistance.Get(uid);
         public static EHumanBone GetRandomHumanBone(int max = 2) => ListHumanBones[Rand.Int32(0, max)];
 
+        public static float GetProjectileVelocityScale(EPrefabUID uid) => ListProjectileVelocityScale.Get(uid);
+        public static float GetProjectileInitialDistance(Int32 id) => ListProjectileInitialDistance.Get(id);
+        public static float GetMaxVelocity(Int32 id) => ListMaxVelocity.Get(id);
+        
         #region [Range Weapons]
         
         #region [HashSet] ListFireHeald
@@ -120,6 +125,75 @@ namespace UServer3.Rust.Data
         
         #endregion
 
+        #region [Projectile]
+
+        #region [Dictionary] ListProjectileVelocityScale
+        private static Dictionary<EPrefabUID, Single> ListProjectileVelocityScale = new Dictionary<EPrefabUID, Single>()
+        {
+            [EPrefabUID.Bow] = 1,
+            [EPrefabUID.CrossBow] = 1.5f,
+            [EPrefabUID.Revolver] = 1,
+            [EPrefabUID.Shotgun] = 1,
+            [EPrefabUID.Tomphson] = 1,
+            [EPrefabUID.SemiRifle] = 1,
+            [EPrefabUID.P90] = 1,
+            [EPrefabUID.Pyton] = 1,
+            [EPrefabUID.PumpShotgun] = 1,
+            [EPrefabUID.NailGun] = 1,
+            [EPrefabUID.MP5] = 0.8f,
+            [EPrefabUID.M92] = 1,
+            [EPrefabUID.M249] = 1.3f,
+            [EPrefabUID.LR300] = 1,
+            [EPrefabUID.Eoka] = 1,
+            [EPrefabUID.DoubleShotgun] = 1,
+            [EPrefabUID.SMG] = 0.8f,
+            [EPrefabUID.AK47] = 1,
+            [EPrefabUID.Bolt] = 1.75f,
+        };
+        #endregion
+        
+        #region [Dictionary] ListProjectileInitialDistance
+        private static Dictionary<Int32, Single> ListProjectileInitialDistance = new Dictionary<Int32, Single>()
+        {
+            [0] = 0,
+            [2115555558] = 0,  // ammo.handmade.shell
+            [-533875561] = 15, // ammo.pistol
+            [1621541165] = 15, // ammo.pistol.fire
+            [-422893115] = 15, // ammo.pistol.hv
+            [815896488] = 15,  // ammo.rifle
+            [805088543] = 15,  // ammo.rifle.explosive
+            [449771810] = 15,  // ammo.rifle.incendiary
+            [1152393492] = 15, // ammo.rifle.hv
+            [-1035059994] = 3, // ammo.shotgun
+            [1819281075] = 10, // ammo.shotgun.slug
+            [-1280058093] = 0, // arrow.hv
+            [-420273765] = 0,  // arrow.wooden
+            [590532217] = 0,   // ammo.nailgun.nails
+        };
+        #endregion
+
+        #region [Dictionary] ListMaxVelocity
+        private static Dictionary<Int32, Single> ListMaxVelocity = new Dictionary<Int32, Single>()
+        {
+            [0] = 25,
+            [2115555558] = 120,  // ammo.handmade.shell
+            [-533875561] = 300,  // ammo.pistol
+            [1621541165] = 225,  // ammo.pistol.fire
+            [-422893115] = 400,  // ammo.pistol.hv
+            [815896488] = 375,   // ammo.rifle
+            [805088543] = 225,   // ammo.rifle.explosive
+            [449771810] = 225,   // ammo.rifle.incendiary
+            [1152393492] = 450,  // ammo.rifle.hv
+            [-1035059994] = 245, // ammo.shotgun
+            [1819281075] = 225,  // ammo.shotgun.slug
+            [-1280058093] = 80,  // arrow.hv
+            [-420273765] = 50,   // arrow.wooden
+            [590532217] = 50,    // ammo.nailgun.nails
+        };
+        #endregion
+
+        #endregion
+        
         #region [Hits]
 
         #region [Method] GetTargetHit
