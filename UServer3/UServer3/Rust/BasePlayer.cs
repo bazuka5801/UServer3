@@ -12,6 +12,7 @@ using UServer3.Rust.Struct;
 using UServer3.CSharp.Reflection;
 using  UServer3.CSharp.ExtensionMethods;
 using UServer3.Rust.Data;
+using Bounds = UServer3.Rust.Struct.Bounds;
 
 namespace UServer3.Rust
 {
@@ -35,8 +36,8 @@ namespace UServer3.Rust
         public bool HasActiveItem => this.ActiveItem != null;
         public bool IsLocalPlayer => this == LocalPlayer;
         
-        public bool IsDucked => ModelState.ducked;
-        public float GetHeight() => IsDucked ? 0.7f : 1.5f;
+        public bool IsDucked => ModelState?.ducked == true;
+        public float GetHeight() => IsDucked ? 0.9f : 1.8f;
         
         public Vector3 ViewAngles = Vector3.zero;
         public Vector3 EyePos = Vector3.zero;
@@ -93,6 +94,20 @@ namespace UServer3.Rust
             }
         }
 
+        public float GetCenter()
+        {
+            return GetHeight() * 0.5f;
+        }
+        
+        public Vector3 GetCenterVector()
+        {
+            return new Vector3(0, GetCenter(), 0);
+        }
+        
+        public override Bounds GetBounds()
+        {
+            return new Bounds(GetCenterVector(), new Vector3(1, 1.8f, 1));
+        }
 
         public void OnChangeActiveItem(UInt32 activeItem)
         {
@@ -110,6 +125,14 @@ namespace UServer3.Rust
 //            float angle = (float) (this.Rotation.y * 0.01745329251f);
 //            return new Vector3((float)Math.Sin(angle), 0, (float)Math.Cos(angle));
             return ViewAngles.ToQuaternion() * Vector3.forward;
+        }
+        
+        public Vector3 GetForward(Vector3 pos)
+        {
+//                                   Math.PI * this.Rotation.y / 180.0
+//            float angle = (float) (this.Rotation.y * 0.01745329251f);
+//            return new Vector3((float)Math.Sin(angle), 0, (float)Math.Cos(angle));
+            return (pos - EyePos).normalized;
         }
         #endregion
 

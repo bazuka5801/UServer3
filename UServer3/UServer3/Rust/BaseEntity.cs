@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using ProtoBuf;
 using UnityEngine;
+using UServer3.CSharp.ExtensionMethods;
+using Bounds = UServer3.Rust.Struct.Bounds;
+using OBB = UServer3.Rust.Struct.OBB;
 
 namespace UServer3.Rust
 {
@@ -10,7 +13,14 @@ namespace UServer3.Rust
         public Vector3 Position;
         public Vector3 Rotation;
         public int Flags;
-        
+        public Bounds Bounds;
+
+        public override void OnEntityCreate(Entity entity)
+        {
+            base.OnEntityCreate(entity);
+            Bounds = GetBounds();
+        }
+
         public override void OnEntityUpdate(Entity entity)
         {
             base.OnEntityUpdate(entity);
@@ -27,6 +37,25 @@ namespace UServer3.Rust
             Position = position;
             Rotation = rotation;
         }
+
+        #region [Geometry]
+
+        public Struct.OBB WorldSpaceBounds()
+        {
+            return new Struct.OBB(this.Position, Vector3.one, Rotation.ToQuaternion(), this.Bounds);
+        }
+
+        public virtual Bounds GetBounds()
+        {
+            return new Bounds(Position, Vector3.one);
+        }
+        
+        public Vector3 ClosestPoint(Vector3 position)
+        {
+            return this.WorldSpaceBounds().ClosestPoint(position);
+        }
+        
+        #endregion
         
         public static T FindNearEntity<T>(List<T> list, float max_distance = float.PositiveInfinity) where T : BaseEntity
         {

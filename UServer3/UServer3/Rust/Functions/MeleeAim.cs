@@ -56,10 +56,12 @@ namespace UServer3.Rust.Functions
 
                         var bone = OpCodes.GetTargetHit(0, Settings.Aimbot_Melee_Silent_AutoHeadshot);
                         var attackInfo = OpCodes.GetTargetHitInfo(bone);
-                        DDraw.Arrow(target.Position + new Vector3(0, target.GetHeight() * 0.5f, 0),
-                            target.Position + new Vector3(0, target.GetHeight() * 0.5f, 0) -
-                            BasePlayer.LocalPlayer.GetForward(), 0.1f, Color.blue, 1f);
-                        var position = target.Position+new Vector3(0,target.GetHeight()*0.5f,0) - BasePlayer.LocalPlayer.GetForward();
+
+                        var closestPoint = target.ClosestPoint(BasePlayer.LocalPlayer.EyePos);
+                        var offset = BasePlayer.LocalPlayer.GetForward(closestPoint)*1.4f;
+                        DDraw.DrawBox(target.WorldSpaceBounds().position, target.WorldSpaceBounds().extents * 2, Color.magenta, 1f);
+                        DDraw.Arrow(closestPoint, closestPoint - offset, 0.1f, Color.blue, 1f);
+                        var position = closestPoint - offset;
                         BasePlayer.LocalPlayer.ActiveItem.SendMeleeAttack(target, bone, position);
                     }
                 }

@@ -100,8 +100,10 @@
     <Compile Include="Rust\Network\VirtualServer.cs" />
     <Compile Include="Rust\OreBonus.cs" />
     <Compile Include="Rust\OreResource.cs" />
+    <Compile Include="Rust\Struct\Bounds.cs" />
     <Compile Include="Rust\Struct\FiredProjectile.cs" />
     <Compile Include="Rust\Struct\HitInfo.cs" />
+    <Compile Include="Rust\Struct\OBB.cs" />
     <Compile Include="Rust\Struct\TargetAimInformation.cs" />
     <Compile Include="Rust\Struct\UserInformation.cs" />
     <Compile Include="Settings.cs" />
