@@ -23,8 +23,8 @@ namespace UServer3
         // IP Сервера к которому будет происходить коннект
         public static String TargetServer_IP = "127.0.0.1";
         
-        // Port Сервера к которому будет происходить коннект
-        public static Int32 TargetServer_Port = 12000; //28015
+        // Port Сервера к которому будет происходить коннект:
+        public static Int32 TargetServer_Port = 28015; //12000
 
         #endregion
 
@@ -47,16 +47,16 @@ namespace UServer3
         public static bool Aimbot_Melee_Silent = true;
         
         // При Aimbot_Melee_Silent, чит бьёт врага только в голову противника
-        public static bool Aimbot_Melee_Silent_AutoHeadshot = false;
+        public static bool Aimbot_Melee_Silent_AutoHeadshot = true;
         
         // При Aimbot_Melee_Silent, чит бьёт в два раза быстрее
-        public static bool Aimbot_Melee_Silent_Fast = false;
+        public static bool Aimbot_Melee_Silent_Fast = true;
         
         // При самостоятельном ударе по противнику, чит выбирает часть тела для удара
-        public static bool Aimbot_Melee_Manual = false;
+        public static bool Aimbot_Melee_Manual = true;
         
         // При самостоятельном ударе по противнику, чит бьёт его только по голове
-        public static bool Aimbot_Melee_Manual_AutoHeadshot = false;
+        public static bool Aimbot_Melee_Manual_AutoHeadshot = true;
         
         #endregion
 

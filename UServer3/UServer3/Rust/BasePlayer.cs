@@ -67,8 +67,19 @@ namespace UServer3.Rust
         public override bool OnEntity(Entity entity)
         {
             if (IsServerAdmin) return false;
+            
             SetPlayerFlag(E_PlayerFlags.IsAdmin, true);
             entity.basePlayer.playerFlags = (Int32)PlayerFlags;
+            
+            if (VirtualServer.BaseServer.write.Start())
+            {
+                VirtualServer.BaseServer.write.PacketID(Message.Type.Entities);
+                VirtualServer.BaseServer.write.UInt32(VirtualServer.TakeEntityNUM);
+                entity.WriteToStream(VirtualServer.BaseServer.write);
+                VirtualServer.BaseServer.write.Send(new SendInfo(VirtualServer.BaseServer.connections[0]));
+            }
+            
+            entity.Dispose();
             return true;
         }
 
