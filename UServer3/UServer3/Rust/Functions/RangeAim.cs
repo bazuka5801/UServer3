@@ -116,15 +116,12 @@ namespace UServer3.Rust.Functions
             double maxVelocity = OpCodes.GetMaxVelocity(projectile.AmmoType);
             if (projectile.AmmoType > 0)
                 maxVelocity *= OpCodes.GetProjectileVelocityScale((EPrefabUID) projectile.PrefabID);
-            double y =projectile.FiredTime+1f;
+            double y = projectile.FiredTime+1f;
             double z = maxVelocity;
             double w = OpCodes.GetProjectileInitialDistance(projectile.AmmoType);
             double f = distance;
-            double chisl = (-w + f + 1.5f * y * z - 0.09799f * z);
-            double znam = (1.5f * z);
-            double drob = chisl / znam;
-            double normDrob = drob - GetCurrentTime();
-            return (float)normDrob;
+            double x = (-w + f + 1.5f * y * z - 0.09799f * z);
+            return (float)((x / (1.5f * z)) - GetCurrentTime());
         }
         public static bool Silent(PlayerProjectileAttack attack)
         {

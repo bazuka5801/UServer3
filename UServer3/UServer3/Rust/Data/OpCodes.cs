@@ -22,7 +22,8 @@ namespace UServer3.Rust.Data
         public static float GetProjectileVelocityScale(EPrefabUID uid) => ListProjectileVelocityScale.Get(uid);
         public static float GetProjectileInitialDistance(Int32 id) => ListProjectileInitialDistance.Get(id);
         public static float GetMaxVelocity(Int32 id) => ListMaxVelocity.Get(id);
-        
+
+        public static bool IsStorage(UInt32 uid) => ListStorages.Contains((EPrefabUID) uid);
         #region [Range Weapons]
         
         #region [HashSet] ListFireHeald
@@ -125,6 +126,16 @@ namespace UServer3.Rust.Data
         
         #endregion
 
+        #region [Storages]
+
+        private static HashSet<EPrefabUID> ListStorages = new HashSet<EPrefabUID>()
+        {
+            EPrefabUID.StorageBox,
+            EPrefabUID.LargeStorageBox
+        };
+
+        #endregion
+        
         #region [Projectile]
 
         #region [Dictionary] ListProjectileVelocityScale

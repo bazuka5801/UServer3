@@ -24,6 +24,7 @@ namespace UServer3.Environments
             this.AddType<RangeAim>();
             this.AddType<MeleeAim>();
             this.AddType<AutoGather>();
+            this.AddType<WallHack>();
         }
     }
 }

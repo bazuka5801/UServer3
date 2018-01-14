@@ -48,5 +48,8 @@ namespace UServer3.Rust.Data
         Shotgun         = 3985541686, // Самодельный Дробовик
         Eoka            = 1708036973, // Самодельная пуколка - недо дробовик
         SMG             = 210451560,  // SMGшка
+        
+        LargeStorageBox = 3439001196,
+        StorageBox      = 2014947887,
     }
 }

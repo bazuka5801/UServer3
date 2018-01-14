@@ -1,6 +1,7 @@
 ﻿using System;
 using ProtoBuf;
 using RakNet.Network;
+using SapphireEngine;
 using UnityEngine;
 using UServer3.Rust.Data;
 
@@ -33,6 +34,10 @@ namespace UServer3.Rust.Rust
             else if (entity.heldEntity != null)
             {
                 ent = new BaseHeldEntity();
+            }
+            else if (OpCodes.IsStorage(entity.baseNetworkable.prefabID))
+            {
+                ent = new StorageContainer();
             }
             else if (Database.IsCollectible(prefabId))
             {

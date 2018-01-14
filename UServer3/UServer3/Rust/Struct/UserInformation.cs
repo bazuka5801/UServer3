@@ -27,7 +27,7 @@ namespace UServer3.Rust.Struct
                 userInformation.ConnectionProtocol = message.read.UInt32();
                 userInformation.OS = message.read.String();
                 userInformation.Username = message.read.String();
-                userInformation.Branch = message.ToString();
+                userInformation.Branch = message.read.String();
                 userInformation.SteamToken = message.read.BytesWithSize();
                 
                 message.peer.read.Position = 0L;
@@ -42,6 +42,17 @@ namespace UServer3.Rust.Struct
                 ConsoleSystem.LogError("Error to Struct.UserInformation.ParsePacket(): " + ex.Message);
             }
             return default(UserInformation);
+        }
+
+        public void Write(NetworkPeer peer)
+        {
+            peer.write.UInt8(PacketProtocol);
+            peer.write.UInt64(SteamID);
+            peer.write.UInt32(ConnectionProtocol);
+            peer.write.String(OS);
+            peer.write.String(Username);
+            peer.write.String(Branch);
+            peer.write.BytesWithSize(SteamToken);
         }
     }
 }

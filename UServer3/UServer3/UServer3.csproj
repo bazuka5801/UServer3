@@ -94,12 +94,14 @@
     <Compile Include="Rust\Functions\AutoGather.cs" />
     <Compile Include="Rust\Functions\MeleeAim.cs" />
     <Compile Include="Rust\Functions\RangeAim.cs" />
+    <Compile Include="Rust\Functions\WallHack.cs" />
     <Compile Include="Rust\Network\DDraw.cs" />
     <Compile Include="Rust\Network\EntityManager.cs" />
     <Compile Include="Rust\Network\NetworkManager.cs" />
     <Compile Include="Rust\Network\VirtualServer.cs" />
     <Compile Include="Rust\OreBonus.cs" />
     <Compile Include="Rust\OreResource.cs" />
+    <Compile Include="Rust\StorageContainer.cs" />
     <Compile Include="Rust\Struct\Bounds.cs" />
     <Compile Include="Rust\Struct\FiredProjectile.cs" />
     <Compile Include="Rust\Struct\HitInfo.cs" />

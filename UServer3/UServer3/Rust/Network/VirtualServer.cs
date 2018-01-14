@@ -4,6 +4,7 @@ using ProtoBuf;
 using SapphireEngine;
 using SapphireEngine.Functions;
 using RakNet.Network;
+using UnityEngine.AI;
 using UServer3.Environments;
 using UServer3.Environments.Cryptography;
 using UServer3.Rust;
@@ -197,7 +198,21 @@ namespace UServer3.Rust.Network
                     return;
                 case Message.Type.GiveUserInformation:
                     ConnectionInformation = UserInformation.ParsePacket(packet);
-                    SendPacket(BaseClient, packet);
+                    
+                    if (Settings.UseCustomToken)
+                    {
+                        ConnectionInformation.SteamToken = Settings.CustomToken;
+                        if (BaseClient.write.Start())
+                        {
+                            BaseClient.write.PacketID(Message.Type.GiveUserInformation);
+                            ConnectionInformation.Write(BaseClient);
+                            BaseClient.Send();
+                        }
+                    }
+                    else
+                    {
+                        SendPacket(BaseClient, packet);
+                    }
                     break;
                 case Message.Type.EAC:
                     EACServer.OnMessageReceived(packet);
